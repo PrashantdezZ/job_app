@@ -266,7 +266,8 @@ class AdminDrawer extends StatelessWidget {
                 onTap: (){},
               ),
             ],
-          ),
+          )
+          ,
 
           ListTile(
                 trailing: Icon(Icons.arrow_forward),
