@@ -17,23 +17,6 @@ class jobProvider extends ChangeNotifier{
     // List<dynamic> item = json.decode(response.body);
     //       List<JobCategory> responseData = item.map<JobCategory>((e) => JobCategory.fromJson(e)).toList();
     
-  List<Jobs> jobResponseData =[];
   
-  
-  void getJobs()async{
-    
-    
-    
-    var token  = await UserPreferences().getToken();
-    
-     dynamic  data =await  NetworkApiService().getGetApiResponse(AppUrl.baseUrl+'/job/jobs/', token);
-     
-     List<dynamic> item = json.decode(data.body);
-     List<Jobs> responseDat = item.map<Jobs>((e) => Jobs.fromJson(e)).toList();
-     
-     jobResponseData = responseDat;
-    
-    notifyListeners();
-    }
     
 }

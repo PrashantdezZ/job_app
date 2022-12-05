@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'dart:io';
 
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:job_app/app_urls/app_urls.dart';
+import 'package:job_app/screens/home.dart';
 import 'package:job_app/widgets/utlis.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -89,10 +91,12 @@ class AuthProvider extends ChangeNotifier{
       _LoggedInstatus = Status.LoggedIn;
       notifyListeners();
       if(user.isStaff!=true){
-        Navigator.of(context).pushReplacementNamed('/home');
+        context.navigateNamedTo('/home');
       }
       else{
-        Navigator.of(context).pushReplacementNamed('/dashboard',);
+        context.navigateNamedTo('/staffhome');
+        
+        
       }
       
       
@@ -154,7 +158,7 @@ class AuthProvider extends ChangeNotifier{
         _Registeredstatus=Status.Registered;
         notifyListeners();
         
-        Navigator.of(context).pushReplacementNamed('/login');
+        context.navigateNamedTo('/login');
         flushBarErrorMessage('Verify your email before login', context);
       }
       return responsebody;
@@ -179,9 +183,10 @@ class AuthProvider extends ChangeNotifier{
       print(data);
       if(response.statusCode==201){
         
-
-        Navigator.of(context).pushReplacementNamed('/forgot_password_verify');
         flushBarErrorMessage(data, context);
+        Timer(Duration(seconds: 2),()=>context.navigateNamedTo('/forgot-password-verify'));
+        
+        
       }
       return response;
     }catch (e){
@@ -205,7 +210,7 @@ class AuthProvider extends ChangeNotifier{
         print('password set successsfuly ');
         flushBarErrorMessage(response.body+'\n login to continue..', context);
         Timer(Duration(seconds: 2), (){
-          Navigator.of(context).pushReplacementNamed('/login');
+          context.navigateNamedTo('/login');
         });
       }
 

@@ -4,6 +4,7 @@
 
 
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:job_app/providers/auth_provider.dart';
@@ -200,10 +201,10 @@ Container(color:Colors.black.withOpacity(0.50)),
                     fontSize: 20,
                   )
                 ),
-                onTap: () => Navigator.of(context).pushReplacementNamed('/forgot_password'),
+                onTap: () =>context.navigateNamedTo('/forgot-password')
               ),
               GestureDetector(
-                onTap: () => Navigator.of(context).pushReplacementNamed('/signup'),
+                onTap: () => context.navigateNamedTo('/signup'),
                 child: RichText(
                   text:  TextSpan(
                     style:TextStyle(color: Color.fromARGB(255, 2, 2, 2)),
@@ -228,7 +229,7 @@ Container(color:Colors.black.withOpacity(0.50)),
                           elevation: 5.0,
                           height: 40,
                       onPressed: () {
-                        Navigator.of(context).pushReplacementNamed('/signup');
+                        context.navigateNamedTo('/signup');
                       },
                           child: Text(
                             

@@ -3,6 +3,8 @@
 
 
 
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +21,7 @@ import '../model/user_model.dart';
 // _pref.setString('token', token);
 
 // }
-class UserPreferences{
+class UserPreferences with ChangeNotifier{
 
   Future<bool> saveUser(User user)async{
     final SharedPreferences _pref = await SharedPreferences.getInstance();
@@ -27,8 +29,8 @@ class UserPreferences{
     _pref.setString('email', user.email!);
     _pref.setInt('id', user.id!);
     _pref.setString('token', user.token!);
-    // _pref.setBool('is_verified', user.emailVerified!);
-
+    _pref.setBool('is_staff', user.isStaff!);
+    notifyListeners();
     return _pref.commit();
 
     
@@ -41,6 +43,8 @@ class UserPreferences{
     _pref.remove('email');
     _pref.remove('id');
     _pref.remove('token');
+    _pref.remove('is_staff');
+    notifyListeners();
     
   }
   Future<User> getUser() async{
@@ -49,11 +53,13 @@ class UserPreferences{
     int? id = _pref.getInt('id');
     String? email = _pref.getString('email');
     String? token = _pref.getString('token');
+    bool? is_staff  = _pref.getBool('is_staff');
 
     return User(
       email: email,
       id: id,
-      token: token
+      token: token,
+      isStaff: is_staff
     );
 
   }

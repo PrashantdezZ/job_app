@@ -1,17 +1,18 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_app/desgin_elements/design.dart';
+import 'package:job_app/model/job_model/job.dart';
 
-class JobDetailPage extends StatefulWidget {
-  const JobDetailPage({Key? key}) : super(key: key);
 
-  @override
-  State<JobDetailPage> createState() => _JobDetailPageState();
-}
 
-class _JobDetailPageState extends State<JobDetailPage> {
+class JobDetailPage extends StatelessWidget {
+  final int id;
+  final Jobs? job;
+   JobDetailPage({Key? key, @PathParam() required this.id, this.job}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -76,7 +77,7 @@ class _JobDetailPageState extends State<JobDetailPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Position : Flutter Developer',
+                      Text(job!.title ,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                                       fontSize: 18,
@@ -103,9 +104,9 @@ class _JobDetailPageState extends State<JobDetailPage> {
                               color:Color.fromARGB(224, 255, 255, 255),
                               borderRadius: BorderRadius.circular(8)),
                             
-                            child: CircleAvatar(foregroundImage: AssetImage('assets/images/splash.jpg'))),
+                            child: CircleAvatar(foregroundImage: NetworkImage(job!.bannerUrl))),
                             SizedBox(width: 7,),
-                        Text('Company Name',
+                        Text(job!.company,
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                                           fontSize: 18,
@@ -127,7 +128,7 @@ class _JobDetailPageState extends State<JobDetailPage> {
                             borderRadius: BorderRadius.circular(7)
 
                           ),
-                          child: Text('Remote work',style: TextStyle(
+                          child: Text(job!.jobType,style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
                             color: Palette.lightPurple,
@@ -143,7 +144,7 @@ class _JobDetailPageState extends State<JobDetailPage> {
                             borderRadius: BorderRadius.circular(7)
 
                           ),
-                          child: Text('Full Time',style: TextStyle(
+                          child: Text(job!.location,style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
                             color: Palette.lightPurple,

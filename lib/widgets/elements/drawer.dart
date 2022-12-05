@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -91,7 +92,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Education') ,
                 onTap: (){
-                    Navigator.of(context).pushReplacementNamed('/education');
+                    context.router.navigateNamed('education');
                 },
 
               ),
@@ -227,7 +228,8 @@ class UserDrawer extends StatelessWidget {
                 title: Text('Log Out'),
                 onTap: (){
                   UserPreferences().removeUser();
-                  Navigator.of(context).pushReplacementNamed('/login');
+                  context.router.navigateNamed('/login');
+                  // context.navigateNamedTo('/login');
                 },
               ),
 

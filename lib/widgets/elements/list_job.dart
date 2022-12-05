@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:job_app/desgin_elements/design.dart';
 import 'package:job_app/model/job_model/job.dart';
 import 'package:job_app/providers/job_provider.dart';
+import 'package:job_app/providers/user_creds/staff_provider.dart';
+import 'package:job_app/routes/router.gr.dart';
+import 'package:job_app/screens/jobDetailscreen.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
 
 class List_job extends StatefulWidget {
   const List_job({
@@ -21,7 +25,7 @@ class _List_jobState extends State<List_job> {
     
   @override
   Widget build(BuildContext context) {
-    Provider.of<jobProvider>(context,listen: false).getJobs();
+    Provider.of<StaffProvider>(context,listen: false).getJobs();
     return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +45,7 @@ class _List_jobState extends State<List_job> {
         padding: const EdgeInsets.only(left:18.0,top:7,right: 18),
         child: Column(
           children: [
-            Consumer<jobProvider>(
+            Consumer<StaffProvider>(
               builder: (context, provider, child) {
                 return ListView.builder(
                   shrinkWrap: true,
@@ -54,7 +58,9 @@ class _List_jobState extends State<List_job> {
                       return  GestureDetector(
                 
                               onTap:(){
-                                Navigator.of(context).pushReplacementNamed('/detail_page',);
+                                print(job.id);
+                                context.router.push(JobDetailRoute(id: job.id,job: job));
+                                // Navigator.of(context).pushReplacementNamed('/detail_page',);
                               },
                               child: Container(
                                 margin: EdgeInsets.only(bottom: 15),

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -67,6 +68,7 @@ class ForgotScreen extends StatelessWidget {
                                 onPressed: () {
                                   
                                  provider.forgotPassword(context, emailController.text.toString());
+                                //  context.navigateNamedTo('/forgot-password-verify');
                                 },
 
                                 child: Text(

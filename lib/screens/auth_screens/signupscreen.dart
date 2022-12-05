@@ -1,6 +1,7 @@
 
 // import 'model.dart';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:job_app/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
@@ -229,7 +230,7 @@ class _RegisterState extends State<Register> {
                                 height: 40,
                                 onPressed: () {
                                   CircularProgressIndicator();
-                                  Navigator.of(context).pushReplacementNamed('/login');
+                                  context.navigateNamedTo('/login');
                                 },
                                 child: Text(
                                   "Login",

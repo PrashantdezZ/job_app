@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -27,11 +28,18 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     // print(preferences.getString('email'));
     var email = preferences.getString('email');
-    if(email!=null){
-      Navigator.pushReplacementNamed(context, '/home');
+    bool? is_staff = preferences.getBool('is_staff');
+    if(email!=null && is_staff ==true){
+     context.navigateNamedTo('/staffhome');
+     
     }
-    else{
-      Navigator.pushReplacementNamed(context, '/login');
+    else if (email!=null && is_staff ==false ){
+
+      context.navigateNamedTo('/home');
+     
+    }
+    else if (email == null && is_staff ==null){
+        context.navigateNamedTo('/login');
     }
     
   } 

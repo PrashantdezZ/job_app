@@ -144,7 +144,8 @@ void addCategoryDialog(BuildContext ctx){
                       ElevatedButton(onPressed: (){
                         print(currentItemSelected);
                         print(files);
-                        provider.postJobCategory(currentItemSelected, files);
+                        provider.postJobCategory(ctx,currentItemSelected, files);
+                        
                       }, child: Text('Create'))
                     ],
                   );

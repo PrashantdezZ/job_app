@@ -1,8 +1,10 @@
 
 
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:job_app/routes/router.gr.dart';
 import 'package:job_app/screens/staff_screen/staff_add_dialog.dart';
 import 'package:job_app/shared_preferences.dart/user_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,7 +60,7 @@ class AdminDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Job') ,
                 onTap: (){
-
+                    context.router.navigateNamed('/staff-jobs');
                 },
 
               ),
@@ -94,7 +96,7 @@ class AdminDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Job category') ,
                 onTap: (){
-
+                    context.router.navigateNamed('/jobCategory');
                 },
 
               ),
@@ -106,18 +108,7 @@ class AdminDrawer extends StatelessWidget {
                   addCategoryDialog(context);
                 },
               ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.update),
-                title: Text('Update Job Category') ,
-                onTap: (){},
-              ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.delete),
-                title: Text('Delete Job Category'),
-                onTap: (){},
-              ),
+              
 
               
             ],
@@ -170,7 +161,7 @@ class AdminDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Ads Banner') ,
                 onTap: (){
-
+                    context.router.navigateNamed('/staff-ads');
                 },
 
               ),
@@ -180,18 +171,7 @@ class AdminDrawer extends StatelessWidget {
                 title: Text('Create Ads Banner'),
                 onTap: (){},
               ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.update),
-                title: Text('Update Ads Banner') ,
-                onTap: (){},
-              ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.delete),
-                title: Text('Delete Ads Banner'),
-                onTap: (){},
-              ),
+              
             ],
           ),
           ExpansionTile(
@@ -216,18 +196,7 @@ class AdminDrawer extends StatelessWidget {
                 title: Text('Add Companies'),
                 onTap: (){},
               ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.update),
-                title: Text('Update Companies') ,
-                onTap: (){},
-              ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.delete),
-                title: Text('Delete Companies'),
-                onTap: (){},
-              ),
+             
 
             ],
           ),
@@ -253,29 +222,20 @@ class AdminDrawer extends StatelessWidget {
                 title: Text('Create Ideas'),
                 onTap: (){},
               ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.update),
-                title: Text('Update Ideas') ,
-                onTap: (){},
-              ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.delete),
-                title: Text('Delete Ideas'),
-                onTap: (){},
-              ),
+              
             ],
           )
           ,
 
           ListTile(
                 trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.delete),
-                title: Text('Delete Ideas'),
+                leading: Icon(Icons.logout),
+                title: Text('Logout'),
                 onTap: (){
                   UserPreferences().removeUser();
-                  Navigator.of(context).pushReplacementNamed('/login');
+                  context.router.replaceNamed('/login') ;
+                  
+                  
                 },
               ),
         ],
