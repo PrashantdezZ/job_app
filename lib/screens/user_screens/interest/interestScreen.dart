@@ -1,8 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/model/usermodels/interest.dart';
-import 'package:job_app/model/usermodels/skill.dart';
-import 'package:job_app/providers/user_creds/user_data.dart';
+import 'package:job_app/data/model/usermodels/interest.dart';
+import 'package:job_app/data/model/usermodels/skill.dart';
+import 'package:job_app/data/providers/user_creds/user_data.dart';
 import 'package:job_app/widgets/elements/drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -16,11 +17,13 @@ class InterestScreen extends StatefulWidget {
 class _InterestScreenState extends State<InterestScreen> {
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserData>(context).getInterest();
+    Provider.of<UserData>(context,listen: false).getInterest();
     return Scaffold(
-      drawer: UserDrawer(),
-      appBar:AppBar(
-        
+      
+      appBar: AppBar(
+          leading: IconButton(icon: Icon(Icons.arrow_back_rounded),color: Colors.white,onPressed: (){
+             context.router.replaceNamed('/home');
+          },),
       ),
       body:Container(
         padding: EdgeInsets.all(14),

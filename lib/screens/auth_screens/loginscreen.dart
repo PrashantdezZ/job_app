@@ -7,8 +7,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:job_app/providers/auth_provider.dart';
+import 'package:job_app/data/providers/auth_provider.dart';
 import 'package:job_app/widgets/round_button.dart';
+import 'package:job_app/widgets/utlis.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -174,10 +175,13 @@ Container(color:Colors.black.withOpacity(0.50)),
                                 elevation: 5.0,
                                 height: 40,
                                 onPressed: () {
-                                  print(provider.loading);
+                                  if(_formkey.currentState!.validate()){
+                                      provider.userLogin(context,emailController.text.toString(), passwordController.text.toString());
+                                  }
+                                  
                                   
                                  
-                                  provider.userLogin(context,emailController.text.toString(), passwordController.text.toString());
+                                  
                                  
                                 },
 
@@ -204,7 +208,7 @@ Container(color:Colors.black.withOpacity(0.50)),
                 onTap: () =>context.navigateNamedTo('/forgot-password')
               ),
               GestureDetector(
-                onTap: () => context.navigateNamedTo('/signup'),
+                onTap: () => context.router.navigateNamed('/signup'),
                 child: RichText(
                   text:  TextSpan(
                     style:TextStyle(color: Color.fromARGB(255, 2, 2, 2)),

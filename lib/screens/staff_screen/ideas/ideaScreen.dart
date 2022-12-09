@@ -4,19 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/model/job_model/job.dart';
-import 'package:job_app/providers/job_provider.dart';
-import 'package:job_app/providers/user_creds/staff_provider.dart';
-import 'package:job_app/routes/router.gr.dart';
+import 'package:job_app/data/model/job_model/idea.dart';
+import 'package:job_app/data/model/job_model/job.dart';
+
+import 'package:job_app/data/providers/user_creds/staff_provider.dart';
+import 'package:job_app/data/routes/router.gr.dart';
 import 'package:provider/provider.dart';
 
-class JobScreen extends StatelessWidget {
-  const JobScreen({Key? key}) : super(key: key);
+class IdeaScreen extends StatelessWidget {
+  const IdeaScreen({Key? key}) : super(key: key);
 
   @override
   
   Widget build(BuildContext context) {
-    Provider.of<StaffProvider>(context,listen: false).getJobs();
+    Provider.of<StaffProvider>(context,listen: false).getIdea();
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(icon: Icon(Icons.arrow_back_rounded),color: Colors.white,onPressed: (){
@@ -29,7 +31,7 @@ class JobScreen extends StatelessWidget {
       children: [
         Padding(
                  padding: const EdgeInsets.only(left:18.0,top:7),
-                 child: Text('Recently added jobs',
+                 child: Text('Some Ideas',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
@@ -41,27 +43,28 @@ class JobScreen extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left:18.0,top:7,right: 18),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Consumer<StaffProvider>(
                 builder: (context, provider, child) {
                   return ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    itemCount: provider.jobResponseData.length,
+                    itemCount: provider.idearesponseData.length,
                     
                     itemBuilder: (context, index) {
-                      Jobs job  = provider.jobResponseData[index];
+                     Idea idea  = provider.idearesponseData[index];
                       
                         return  GestureDetector(
                   
                                 onTap:(){
-                                  print(job.id);
-                                  // context.router.push(JobDetailRoute(id: job.id,job: job));
+                                  print(idea.id);
+                                  // context.router.push(ideaDetailRoute(id: idea.id,idea: idea));
                                   // Navigator.of(context).pushReplacementNamed('/detail_page',);
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(bottom: 15),
-                                  height: 62,
+                                  height:size.height*0.24,
                                 
                                   decoration: BoxDecoration(
                                      boxShadow: [
@@ -79,39 +82,21 @@ class JobScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(10.0),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
+                                        
                                         Container(
-                                          width: 60,
-                                          
-                                          
-                                          decoration: BoxDecoration(
-                                            // color: Colors.red,
-                                            borderRadius: BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(job.bannerUrl),)
-                                          ),
-                                        )
-                                        ,
-                                        Padding(
+                                          width: size.width*0.4,
                                           padding: const EdgeInsets.only(left: 12),
                                           child: Column(
                                             mainAxisAlignment: MainAxisAlignment.center,
-                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                                Text(job.title,
+                                                Text(idea.name!,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 16,
+                                                    fontSize: 22,
                                                     color: Palette.lightPurple,
-                                                  ),
-                                                ),
-                                                Text(job.company,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 13,
-                                                    color: Colors.black.withOpacity(0.4),
                                                   ),
                                                 ),
                                             
@@ -119,26 +104,18 @@ class JobScreen extends StatelessWidget {
                                           ),
                                         ),
                                         // SizedBox(width: widget.size.width*0.10,),
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.end,
-                                          children: [
-                                              Text(job.location,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 13,
-                                                  color: Colors.black.withOpacity(0.4),
-                                                ),
-                                              ),
-                                              Text(job.jobType,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 13,
-                                                  color: Colors.black.withOpacity(0.4),
-                                                ),
-                                              ),
+                                        Expanded(
+                                          child: Text(idea.description!,
+                                          softWrap: true,
                                           
-                                          ],
+                                          maxLines: 15,
+                                          overflow: TextOverflow.fade,
+                                            style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                              fontSize: 15,
+                                              color: Colors.black.withOpacity(0.4),
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -160,7 +137,8 @@ class JobScreen extends StatelessWidget {
     
     
       ],
-            ),
+      //      
+      ),
     );
   }
   

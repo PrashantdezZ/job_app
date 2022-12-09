@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_app/providers/user_creds/staff_provider.dart';
+import 'package:job_app/data/providers/user_creds/staff_provider.dart';
 import 'package:provider/provider.dart';
 
 class ScrollWidget extends StatefulWidget {
@@ -83,9 +83,9 @@ class _ScrollWidgetState extends State<ScrollWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                            CircleAvatar(foregroundImage: NetworkImage(cat.imageUrl!),),
+                            CircleAvatar(foregroundImage: NetworkImage(cat.imageUrl),),
                             // Icon(Icons.book,color:widget.colorPurple,),
-                            Text(cat.name!,style: TextStyle(color: Colors.black),),
+                            Text(cat.name,style: TextStyle(color: Colors.black),),
                             // Text(cat.id!.toString(),style: TextStyle(color:Colors.black))
                         ],
                       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/providers/user_creds/staff_provider.dart';
+import 'package:job_app/data/providers/user_creds/staff_provider.dart';
 import 'package:provider/provider.dart';
 
 
@@ -12,7 +12,7 @@ class JobCategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    final provider = Provider.of<StaffProvider>(context).getJobCategory();
+    final provider = Provider.of<StaffProvider>(context,listen: false).getJobCategory();
     return Scaffold(
       
       appBar: AppBar(
@@ -63,10 +63,10 @@ class JobCategoryScreen extends StatelessWidget {
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                           
-                                          Image.network(cat.imageUrl!,fit: BoxFit.fill,height:size.height*0.15,width: size.width*0.4,),
+                                          Image.network(cat.imageUrl,fit: BoxFit.fill,height:size.height*0.15,width: size.width*0.4,),
                                           // CircleAvatar(foregroundImage: NetworkImage(cat.imageUrl!),),
                                           // Icon(Icons.book,color:widget.colorPurple,),
-                                          Text(cat.name!,style: TextStyle(color: Colors.black),),
+                                          Text(cat.name,style: TextStyle(color: Colors.black),),
                                           // Text(cat.id!.toString(),style: TextStyle(color:Colors.black))
                                       ],
                                     ),

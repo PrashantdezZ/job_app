@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart';
-import 'package:job_app/providers/auth_provider.dart';
+import 'package:job_app/data/providers/auth_provider.dart';
 
 class RoundButton extends StatelessWidget {
   final String title;

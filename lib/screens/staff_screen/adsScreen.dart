@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:job_app/model/advertisement.dart';
-import 'package:job_app/providers/user_creds/staff_provider.dart';
+import 'package:job_app/data/model/advertisement.dart';
+import 'package:job_app/data/providers/user_creds/staff_provider.dart';
 import 'package:provider/provider.dart';
 
 class AdvetisementScreen extends StatelessWidget {

@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    // print(preferences.getString('email'));
+    
     var email = preferences.getString('email');
     bool? is_staff = preferences.getBool('is_staff');
     if(email!=null && is_staff ==true){

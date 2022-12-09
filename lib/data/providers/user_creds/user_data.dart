@@ -1,30 +1,27 @@
 
 
 import 'dart:convert';
+import 'dart:io';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:job_app/app_urls/app_urls.dart';
 import 'package:job_app/data/network/networkapiservice.dart';
-import 'package:job_app/model/usermodels/certification.dart';
-import 'package:job_app/model/usermodels/education.dart';
-import 'package:job_app/model/usermodels/experience.dart';
-import 'package:job_app/model/usermodels/interest.dart';
-import 'package:job_app/model/usermodels/language.dart';
-import 'package:job_app/model/usermodels/skill.dart';
-import 'package:job_app/shared_preferences.dart/user_preferences.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:job_app/data/model/usermodels/certification.dart';
+import 'package:job_app/data/model/usermodels/education.dart';
+import 'package:job_app/data/model/usermodels/experience.dart';
+import 'package:job_app/data/model/usermodels/interest.dart';
+import 'package:job_app/data/model/usermodels/language.dart';
+import 'package:job_app/data/model/usermodels/skill.dart';
+import 'package:job_app/data/shared_preferences.dart/user_preferences.dart';
+import 'package:job_app/widgets/utlis.dart';
+
 
 class UserData extends ChangeNotifier{
 
 
   final user_network = NetworkApiService();
-
-  
-    // final  token = UserPreferences().getToken();
-    // List<dynamic> item = json.decode(response.body);
-    //       List<JobCategory> responseData = item.map<JobCategory>((e) => JobCategory.fromJson(e)).toList();
-    
   List<Experience> expResponseData =[];
   
   
@@ -44,41 +41,34 @@ class UserData extends ChangeNotifier{
     }
     
     
-    Future<Response> postUserExperience(String title,String description,DateTime from_date,DateTime to_date,String letter) async{
-      final  user  = await UserPreferences().getUser();
-      print(user.token);
-      print(user.id);
-      final token = user.token;
+    Future postUserExperience(String title,String description,File image) async{
+      
+    final  user  = await UserPreferences().getUser();
+      
+      var length = await image.length();
+    print(length);
+    var stream = new ByteStream(image.openRead());
+    stream.cast();
+      final token =  user.token;
       final user_id = user.id;
-      var body =jsonEncode({
-        'title' : title,
-        'description' :description,
-        'from_date': from_date,
-        'to_date': to_date,
-        'experience_letter_url' : letter,
-        'user':user_id
-      });
-      dynamic response;
+      print(user_id);
+      print(token);
+    var uri = Uri.parse(AppUrl.baseUrl+'/job/experience/') ;
+     var request  = new MultipartRequest('POST', uri);
+     request.headers['Authorizaton'] = 'Bearer $token';
+     var multipartfile  =new MultipartFile('experience_letter', stream, length,filename: image.path);
 
+      request.fields['title'] = '$title';
 
-      try{
-          Response response = await post(Uri.parse(AppUrl.baseUrl+'/job/experience/'),body: body,headers:{                           
-                                                  "Content-Type": "application/json; charset=UTF-8" ,
-                                                  'Accept': 'application/json',
-                                                      'Authorization': 'Bearer $token'} );
-          final data = response.body;
-          print(data);
-          if(response.statusCode == 200){
-            print('created ');
-          }
-      }catch(e){
-        print(e.toString());
-      }
-
-      return response;
-
-
-
+      request.fields['description'] = '$description'; 
+      request.fields['from_date'] = '2022-12-12';
+      request.fields['to_date'] = '2023-11-12';
+      request.fields['user'] = '$user_id';
+      request.files.add(multipartfile);
+      var response = await request.send();
+     print(response.statusCode);
+      
+      
     }
     
     
@@ -155,7 +145,7 @@ class UserData extends ChangeNotifier{
     notifyListeners();
     }
    
-    Future<Response> postEducation(String title,String description,int year)async{
+    Future<void> postEducation(BuildContext context,String title,String description,String passed_year)async{
       final  user  = await UserPreferences().getUser();
       print(user.token);
       print(user.id);
@@ -164,7 +154,7 @@ class UserData extends ChangeNotifier{
       var body =jsonEncode({
         'title' : title,
         'description' :description,
-        'passed_year': year,
+        'passed_year': passed_year,
         'user':user_id
       });
       dynamic response;
@@ -178,13 +168,14 @@ class UserData extends ChangeNotifier{
           final data = response.body;
           print(data);
           if(response.statusCode == 200){
+            flushBarErrorMessage('Education Added', context);
             print('created ');
           }
       }catch(e){
         print(e.toString());
       }
 
-      return response;
+    
     }
 
 
@@ -206,24 +197,7 @@ class UserData extends ChangeNotifier{
     
     notifyListeners();
     }
-    // Future<Response> getInterest()async{
-    //   dynamic response;
-    //     try{
-
-    //        var token  = await UserPreferences().getToken();
-    //       print(token);
-       
-    //     Response response = await get(Uri.parse(AppUrl.baseUrl+'/job/interest/'),headers:{                           
-    //                                               "Content-Type": "application/json; charset=UTF-8" ,
-    //                                               'Accept': 'application/json',
-    //                                                   'Authorization': 'Bearer $token'} ,);
-    //     var data = response.body;
-    //     print(response.body);
-
-    //     }catch(e){
-    //       print(e.toString());
-    //     }
-    //   return response;
+    
     // }
     Future<Response> postInterest(String title)async{
       final  user  = await UserPreferences().getUser();
@@ -273,27 +247,9 @@ class UserData extends ChangeNotifier{
     
     notifyListeners();
     }
-    // Future<Response> getLanguage()async{
-    //   dynamic response;
-    //     try{
-
-    //        var token  = await UserPreferences().getToken();
-    //       print(token);
-       
-    //     Response response = await get(Uri.parse(AppUrl.baseUrl+'/job/language/'),headers:{                           
-    //                                               "Content-Type": "application/json; charset=UTF-8" ,
-    //                                               'Accept': 'application/json',
-    //                                                   'Authorization': 'Bearer $token'} ,);
-    //     var data = response.body;
-    //     print(response.body);
-
-    //     }catch(e){
-    //       print(e.toString());
-    //     }
-    //   return response;
-
-    // }
-    Future<Response> postLanguage(String title)async{
+    
+    
+    Future<void> postLanguage(String title,BuildContext context)async{
       final  user  = await UserPreferences().getUser();
       print(user.token);
       print(user.id);
@@ -315,6 +271,7 @@ class UserData extends ChangeNotifier{
           final data = response.body;
           print(data);
           if(response.statusCode == 200){
+            flushBarErrorMessage('skill added', context);
             print('created ');
           }
       }catch(e){
@@ -324,8 +281,9 @@ class UserData extends ChangeNotifier{
       return response;
     }
     
-    
+
     List<Skill> skillResponseData =[];
+  /////////////////////////////////////////////////Skill\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
   
   void getSkill()async{
@@ -342,35 +300,18 @@ class UserData extends ChangeNotifier{
     
     notifyListeners();
     }
-    // Future<Response> getSkill()async{
-    //   dynamic response;
-    //     try{
-
-    //        var token  = await UserPreferences().getToken();
-    //       print(token);
-       
-    //     Response response = await get(Uri.parse(AppUrl.baseUrl+'/job/skill/'),headers:{                           
-    //                                               "Content-Type": "application/json; charset=UTF-8" ,
-    //                                               'Accept': 'application/json',
-    //                                                   'Authorization': 'Bearer $token'} ,);
-    //     var data = response.body;
-    //     print(response.body);
-
-    //     }catch(e){
-    //       print(e.toString());
-    //     }
-    //   return response;
-    // }
-    Future<Response> postSkill(String title)async{
+    
+    Future<void> postSkill(String title,BuildContext context)async{
       final  user  = await UserPreferences().getUser();
-      print(user.token);
-      print(user.id);
+      
       final token = user.token;
       final user_id = user.id;
+      
+      
       var body =jsonEncode({
-        'title' : 'title',
+        'skill' : title,
         
-        'user':user_id
+        'user':user_id,
       });
       dynamic response;
 
@@ -378,18 +319,22 @@ class UserData extends ChangeNotifier{
       try{
           Response response = await post(Uri.parse(AppUrl.baseUrl+'/job/skill/'),body: body,headers:{                           
                                                   "Content-Type": "application/json; charset=UTF-8" ,
-                                                  'Accept': 'application/json',
+                                                  
                                                       'Authorization': 'Bearer $token'} );
           final data = response.body;
           print(data);
+          print(response.statusCode);
           if(response.statusCode == 200){
+            flushBarErrorMessage('skill added', context);
+            // Navigator.of(context).pop();
+           
             print('created ');
           }
       }catch(e){
         print(e.toString());
       }
 
-      return response;
+     
     }
 
 }

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:job_app/providers/auth_provider.dart';
+import 'package:job_app/data/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class ForgotScreen extends StatelessWidget {
@@ -12,10 +12,15 @@ class ForgotScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size  = MediaQuery.of(context).size;
     final provider = Provider.of<AuthProvider>(context);
     return Scaffold(
-      appBar: AppBar(actions: [
-        Title(color: Colors.white, child: Text('forgot password'))
+      appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back),onPressed: (){
+          context.router.replaceNamed('/login');
+        },),
+        actions: [
+        
 
       ]),
       body:Center(
@@ -24,41 +29,61 @@ class ForgotScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              TextFormField(
-                                controller: emailController,
-                                decoration: InputDecoration(
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  hintText: 'Email',
-                                  enabled: true,
-                                  contentPadding: const EdgeInsets.only(
-                                      left: 14.0, bottom: 8.0, top: 8.0),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: new BorderSide(color: Colors.white),
-                                    borderRadius: new BorderRadius.circular(10),
+              Container(
+                width: size.width*0.8,
+                 alignment: Alignment.center,
+                                   
+                                    
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(29),
+                                      boxShadow: [
+                                                    BoxShadow(
+                                                      offset: Offset(0,0),
+                                                      blurRadius: 5,
+                                                  
+                                                      color:Colors.black.withOpacity(0.3),
+                                      
+                                                    )
+                                                  ]
+                                    ),
+                child: TextFormField(
+                                  controller: emailController,
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    hintText: 'Enter your Email',
+                                    enabled: true,
+                                    contentPadding: const EdgeInsets.only(
+                                        left: 14.0, bottom: 8.0, top: 8.0),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: new BorderSide(color: Colors.white),
+                                      borderRadius: new BorderRadius.circular(29),
+                                    ),
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: new BorderSide(color: Colors.white),
+                                      borderRadius: new BorderRadius.circular(29),
+                                    ),
                                   ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: new BorderSide(color: Colors.white),
-                                    borderRadius: new BorderRadius.circular(10),
-                                  ),
+                                  validator: (value) {
+                                    if (value!.length == 0) {
+                                      return "Email cannot be empty";
+                                    }
+                                    if (!RegExp(
+                                            "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                                        .hasMatch(value)) {
+                                      return ("Please enter a valid email");
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                  // onSaved: (value) {
+                                  //   emailController.text = value!;
+                                  // },
+                                  keyboardType: TextInputType.emailAddress,
                                 ),
-                                validator: (value) {
-                                  if (value!.length == 0) {
-                                    return "Email cannot be empty";
-                                  }
-                                  if (!RegExp(
-                                          "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                      .hasMatch(value)) {
-                                    return ("Please enter a valid email");
-                                  } else {
-                                    return null;
-                                  }
-                                },
-                                // onSaved: (value) {
-                                //   emailController.text = value!;
-                                // },
-                                keyboardType: TextInputType.emailAddress,
-                              ),
+              ),
+              SizedBox(height: 22,),
               MaterialButton(
                                 shape: RoundedRectangleBorder(
                                     borderRadius:

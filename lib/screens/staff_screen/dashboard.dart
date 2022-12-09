@@ -56,7 +56,7 @@ class _DashBoardState extends State<DashBoard> {
               
             ScrollWidget(size: size, colorPurple: colorPurple),
 
-            List_job(size: size),
+            List_job(),
           ]
         ),
 

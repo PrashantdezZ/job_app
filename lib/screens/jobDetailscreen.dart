@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/model/job_model/job.dart';
+import 'package:job_app/data/model/job_model/job.dart';
 
 
 

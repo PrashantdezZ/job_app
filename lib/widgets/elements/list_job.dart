@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/model/job_model/job.dart';
-import 'package:job_app/providers/job_provider.dart';
-import 'package:job_app/providers/user_creds/staff_provider.dart';
-import 'package:job_app/routes/router.gr.dart';
+import 'package:job_app/data/model/job_model/job.dart';
+
+import 'package:job_app/data/providers/user_creds/staff_provider.dart';
+import 'package:job_app/data/routes/router.gr.dart';
 import 'package:job_app/screens/jobDetailscreen.dart';
 import 'package:provider/provider.dart';
 import 'package:auto_route/auto_route.dart';
 
-class List_job extends StatefulWidget {
-  const List_job({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
 
-  final Size size;
 
-  @override
-  State<List_job> createState() => _List_jobState();
-}
-
-class _List_jobState extends State<List_job> {
+class List_job extends StatelessWidget {
   
     
   @override

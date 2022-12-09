@@ -11,10 +11,13 @@ import 'package:job_app/screens/jobDetailscreen.dart';
 import 'package:job_app/screens/splashscreen.dart';
 import 'package:job_app/screens/staff_screen/adsScreen.dart';
 import 'package:job_app/screens/staff_screen/dashboard.dart';
+import 'package:job_app/screens/staff_screen/ideas/ideaScreen.dart';
 import 'package:job_app/screens/staff_screen/jobcategoryScreen.dart';
-import 'package:job_app/screens/staff_screen/jobscreen.dart';
+import 'package:job_app/screens/staff_screen/jobs/jobCreate.dart';
+import 'package:job_app/screens/staff_screen/jobs/jobscreen.dart';
 import 'package:job_app/screens/user_screens/certificates/certificateScreen.dart';
 import 'package:job_app/screens/user_screens/education/educationscreen.dart';
+import 'package:job_app/screens/user_screens/experience/ExperienceCreate.dart';
 import 'package:job_app/screens/user_screens/experience/experiencesscreen.dart';
 import 'package:job_app/screens/user_screens/interest/interestScreen.dart';
 import 'package:job_app/screens/user_screens/language/languageScreen.dart';
@@ -32,23 +35,26 @@ import 'package:job_app/screens/user_screens/skills/skillScreen.dart';
     AutoRoute(path:'/job-detail/:id',page: JobDetailPage),
     AutoRoute(path:'/staffhome',page: DashBoard, ),
     AutoRoute(path: '/jobCategory',page: JobCategoryScreen),
+    AutoRoute(path: '/job-create',page:JobCreateScreen),
     AutoRoute(path:'/staff-jobs',page:JobScreen),
     AutoRoute(path:'/staff-ads',page: AdvetisementScreen),
+    AutoRoute(path:'/staff-idea',page:IdeaScreen ),
 
-    AutoRoute(path:'/home',page:EmptyRouterPage,children: [
-      AutoRoute(path: '',page: Home,),
+    AutoRoute(path:'/home',page:Home),
+     
       
-      AutoRoute(path: 'education',page: EducationScreen,fullscreenDialog: true),
-      AutoRoute(path: 'experience',page:ExperiencesScreen),
-      AutoRoute(path:'skill',page: SkillScreen),
-      AutoRoute(path: 'language',page: LanguageScreen),
-      AutoRoute(path: 'certificate',page: CertificateScreen),
-      AutoRoute(path: 'interest',page: InterestScreen),
-
-    ]),
-  
+      AutoRoute(path: '/education',page: EducationScreen,fullscreenDialog: true),
+      AutoRoute(path: '/experience',page:ExperiencesScreen),
+      AutoRoute(path:'/skill',page: SkillScreen),
+      AutoRoute(path: '/language',page: LanguageScreen),
+      AutoRoute(path: '/certificate',page: CertificateScreen),
+      AutoRoute(path: '/interest',page: InterestScreen),
+      AutoRoute(path: '/create-experience',page: CreateExpereinceScreen)
 
     ])
+  
+
+    
   
 
 class $AppRouter {}

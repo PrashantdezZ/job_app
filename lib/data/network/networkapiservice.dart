@@ -5,6 +5,7 @@ import 'package:http/http.dart';
 import 'package:job_app/data/app_exception/app_exceptions.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:job_app/widgets/utlis.dart';
 
 import 'baseapiservice.dart';
 
@@ -25,7 +26,7 @@ class NetworkApiService extends BaseApiServices {
       // responseJson = response;
       responseJson = returnResponse(response);
     }on SocketException {
-
+      
       throw FetchDataException('No Internet Connection');
     }
 

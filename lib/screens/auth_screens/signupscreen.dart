@@ -3,7 +3,8 @@
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:job_app/providers/auth_provider.dart';
+import 'package:job_app/data/providers/auth_provider.dart';
+import 'package:job_app/widgets/utlis.dart';
 import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
@@ -14,7 +15,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   _RegisterState();
 
-  bool showProgress = false;
+  
   bool visible = false;
 
   final _formkey = GlobalKey<FormState>();
@@ -30,7 +31,7 @@ class _RegisterState extends State<Register> {
   bool _isObscure2 = true;
   
  
-  bool loading =false;
+  
 
   @override 
   void dispose(){
@@ -42,7 +43,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<AuthProvider>(context);
+    final provider = Provider.of<AuthProvider>(context,listen: false);
     return Scaffold(
       // backgroundColor: Colors.orange[900],
       body: Stack(
@@ -247,11 +248,18 @@ class _RegisterState extends State<Register> {
                                 elevation: 5.0,
                                 height: 40,
                                 onPressed: () {
+                                  try{
+                                    if(_formkey.currentState!.validate()){
+                                     provider.userSignup(context,emailController.text.toString(), passwordController.text.toString(), confirmpasswordController.text.toString());
+
+                                  }
+                                  }catch (e){
+                                    snackBar(e.toString(), context);
+                                  }
                                   
-                                    print(provider.signUpLoading);
-                                    print(provider.RegisteredStatus);
+                                    
+                                    
                                  
-                                  provider.userSignup(context,emailController.text.toString(), passwordController.text.toString(), confirmpasswordController.text.toString());
                                   
                                 },
                                     

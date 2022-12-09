@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_app/screens/staff_screen/staff_add_dialog.dart';
-import 'package:job_app/shared_preferences.dart/user_preferences.dart';
+import 'package:job_app/screens/user_screens/users_add_dialog.dart';
+import 'package:job_app/data/shared_preferences.dart/user_preferences.dart';
 
 
 
@@ -29,7 +30,7 @@ class UserDrawer extends StatelessWidget {
                   leading: Icon(Icons.home),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    Navigator.of(context).pushReplacementNamed('/home');
+                    context.router.replaceNamed('/home');
                   },
                 ),
           ListTile(
@@ -56,7 +57,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Certificates') ,
                 onTap: (){
-                  Navigator.of(context).pushReplacementNamed('/certificate');
+                  context.router.replaceNamed('/certificate');
                 },
 
               ),
@@ -64,7 +65,9 @@ class UserDrawer extends StatelessWidget {
                 trailing: Icon(Icons.arrow_forward),
                 leading: Icon(Icons.create),
                 title: Text('Add Certificate'),
-                onTap: (){},
+                onTap: (){
+                  
+                },
               ),
               ListTile(
                 trailing: Icon(Icons.arrow_forward),
@@ -92,7 +95,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Education') ,
                 onTap: (){
-                    context.router.navigateNamed('education');
+                    context.router.navigateNamed('/education');
                 },
 
               ),
@@ -100,7 +103,9 @@ class UserDrawer extends StatelessWidget {
                 trailing: Icon(Icons.arrow_forward),
                 leading: Icon(Icons.create),
                 title: Text('Create Education'),
-                onTap: (){},
+                onTap: (){
+                  addEducationDialog(context);
+                },
               ),
               
 
@@ -119,7 +124,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Expeiences') ,
                 onTap: (){
-                  Navigator.of(context).pushReplacementNamed('/experience');
+                  context.router.replaceNamed('/experience');
                 },
 
               ),
@@ -128,7 +133,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.create),
                 title: Text('Add Expeience'),
                 onTap: (){
-                  addCategoryDialog(context);
+                  context.router.replaceNamed('/create-experience');
                 },
               ),
               
@@ -146,7 +151,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Interests') ,
                 onTap: (){
-                    Navigator.of(context).pushReplacementNamed('/interest');
+                    context.router.replaceNamed('/interest');
                 },
 
               ),
@@ -182,7 +187,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Languages') ,
                 onTap: (){
-                  Navigator.of(context).pushReplacementNamed('/language');
+                  context.router.replaceNamed('/language');
                 },
 
               ),
@@ -190,7 +195,9 @@ class UserDrawer extends StatelessWidget {
                 trailing: Icon(Icons.arrow_forward),
                 leading: Icon(Icons.create),
                 title: Text('Add Languages'),
-                onTap: (){},
+                onTap: (){
+                  addLanguageDialog(context);
+                },
               ),
               
 
@@ -208,7 +215,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Skills') ,
                 onTap: (){
-                  Navigator.of(context).pushReplacementNamed('/skill');
+                  context.router.replaceNamed('/skill');
                 },
 
               ),
@@ -216,7 +223,9 @@ class UserDrawer extends StatelessWidget {
                 trailing: Icon(Icons.arrow_forward),
                 leading: Icon(Icons.create),
                 title: Text('Add Skill'),
-                onTap: (){},
+                onTap: (){
+                  addskillDialog(context);
+                },
               ),
               
               

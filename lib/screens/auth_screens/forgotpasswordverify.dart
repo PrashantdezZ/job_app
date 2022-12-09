@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:job_app/providers/auth_provider.dart';
+import 'package:job_app/data/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class ForgotScreenVerify extends StatefulWidget {

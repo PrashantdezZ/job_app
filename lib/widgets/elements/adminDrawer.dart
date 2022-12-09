@@ -4,9 +4,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:job_app/routes/router.gr.dart';
+import 'package:job_app/data/routes/router.gr.dart';
 import 'package:job_app/screens/staff_screen/staff_add_dialog.dart';
-import 'package:job_app/shared_preferences.dart/user_preferences.dart';
+import 'package:job_app/data/shared_preferences.dart/user_preferences.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminDrawer extends StatelessWidget {
@@ -68,7 +68,9 @@ class AdminDrawer extends StatelessWidget {
                 trailing: Icon(Icons.arrow_forward),
                 leading: Icon(Icons.create),
                 title: Text('Create Job'),
-                onTap: (){},
+                onTap: (){
+                  context.router.navigateNamed('/job-create');
+                },
               ),
               ListTile(
                 trailing: Icon(Icons.arrow_forward),
@@ -212,7 +214,7 @@ class AdminDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Ideas') ,
                 onTap: (){
-
+                  context.router.navigateNamed('/staff-idea');
                 },
 
               ),

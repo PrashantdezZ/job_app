@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/model/job_model/job.dart';
-import 'package:job_app/providers/user_creds/staff_provider.dart';
+import 'package:job_app/data/model/job_model/job.dart';
+import 'package:job_app/data/providers/user_creds/staff_provider.dart';
 import 'package:job_app/widgets/elements/adminDrawer.dart';
 import 'package:job_app/widgets/elements/drawer.dart';
 import 'package:job_app/widgets/elements/list_job.dart';
@@ -14,7 +14,7 @@ import 'package:job_app/widgets/elements/searchWidget.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../providers/user_provider.dart';
+import '../data/providers/user_provider.dart';
 
 class Home extends StatefulWidget {
 
@@ -40,25 +40,16 @@ class _HomeState extends State<Home> {
     _jobTypeController.dispose();
     super.dispose();
   }
-  // @override
-  // void initState(){
-
-    
-  //   // Jobcatprovider.getJobCategory();
-  //   // print(Jobcatprovider.responseData);
-  //   super.initState();
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
     //  Provider.of<StaffProvider>(context);
     
     final Size size  = MediaQuery.of(context).size;
-     Color colorWhite = Colors.white;
-     Color colorPurple = Palette.lightPurple;
-     bool istap =false;
-    print('widget build');
-    // print(Jobcatprovider.responseData);
+    
+    Color colorPurple = Palette.lightPurple;
+     
     
     return Scaffold(
       
@@ -77,7 +68,7 @@ class _HomeState extends State<Home> {
           
         ],
       ) ,
-      // body: Text('dfsdfsdf'),
+      
       body: SingleChildScrollView(
       
         scrollDirection: Axis.vertical,
@@ -88,7 +79,7 @@ class _HomeState extends State<Home> {
               
             ScrollWidget(size: size, colorPurple: colorPurple),
 
-            List_job(size: size),
+            List_job(),
           ]
         ),
 

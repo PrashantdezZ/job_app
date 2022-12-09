@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/providers/user_creds/user_data.dart';
-import 'package:job_app/providers/user_provider.dart';
+import 'package:job_app/data/providers/user_creds/user_data.dart';
+import 'package:job_app/data/providers/user_provider.dart';
 import 'package:job_app/widgets/elements/drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -21,9 +22,11 @@ class _ExperiencesScreenState extends State<ExperiencesScreen> {
     Provider.of<UserData>(context,listen: false).getUserExperience();
 
     return Scaffold(
-      drawer:UserDrawer(),
+     
       appBar: AppBar(
-        
+          leading: IconButton(icon: Icon(Icons.arrow_back_rounded),color: Colors.white,onPressed: (){
+             context.router.replaceNamed('/home');
+          },),
       ),
       body: Padding(
         padding: EdgeInsets.all(15),

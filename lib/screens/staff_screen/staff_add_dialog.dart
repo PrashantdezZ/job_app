@@ -6,8 +6,8 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_app/desgin_elements/design.dart';
-import 'package:job_app/providers/user_creds/staff_provider.dart';
-import 'package:job_app/providers/user_creds/user_data.dart';
+import 'package:job_app/data/providers/user_creds/staff_provider.dart';
+import 'package:job_app/data/providers/user_creds/user_data.dart';
 import 'package:provider/provider.dart';
 void addCategoryDialog(BuildContext ctx){
   final List<String> option = [

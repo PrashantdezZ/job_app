@@ -12,31 +12,14 @@ import 'package:job_app/widgets/utlis.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/app_exception/app_exceptions.dart';
 import '../model/user_model.dart';
 import '../shared_preferences.dart/user_preferences.dart';
 
-enum Status{
-  NotLoggedIn,
-  NotRegistered,
-  LoggedIn,
-  Registered,
-  Authenticating,
-  Registering,
-  LoggedOut,
 
-
-
-}
 
 class AuthProvider extends ChangeNotifier{
 
-  Status _LoggedInstatus = Status.NotLoggedIn;
-
-  Status _Registeredstatus = Status.NotRegistered;
-
-  get LoggedInStatus => _LoggedInstatus;
-  get RegisteredStatus => _Registeredstatus;
+ 
 
   bool _loading = false ;
   bool get loading => _loading ;
@@ -63,15 +46,20 @@ class AuthProvider extends ChangeNotifier{
   Future userLogin(BuildContext context,String email,String password) async{
     var body = jsonEncode({'email': email, 'password': password});
     setLoading(true);
-    _LoggedInstatus = Status.Authenticating;
+    
     notifyListeners();
     try{
       Response  response = await post(Uri.parse(AppUrl.loginEndPint),body: body,headers: headers);
     // print(response.body );
     var verify = jsonDecode(response.body);
     print(verify);
+    print(response.statusCode);
 
-    
+    if(response.statusCode ==400){
+      setLoading(false);
+      notifyListeners();
+      snackBar('Incorrect Password', context);
+    }
     if(response.statusCode ==401){
       setLoading(false);
       notifyListeners();
@@ -83,12 +71,12 @@ class AuthProvider extends ChangeNotifier{
       var data = response.body;
       
       User user = User.fromReqBody(data);
+      print(user.id);
       user.email = email;
       
       
       UserPreferences().saveUser(user);
-      
-      _LoggedInstatus = Status.LoggedIn;
+     
       notifyListeners();
       if(user.isStaff!=true){
         context.navigateNamedTo('/home');
@@ -115,56 +103,47 @@ class AuthProvider extends ChangeNotifier{
 
   }
   
-  dynamic returnResponse (Response response){
-
-    switch(response.statusCode){
-      case 200:
-        dynamic responseJson = jsonDecode(response.body);
-        return responseJson ;
-      case 400:
-        throw BadRequestException(response.body.toString());
-      case 500:
-      case 404:
-        throw UnauthorisedException(response.body.toString());
-      default:
-        throw FetchDataException('Error accured while communicating with server'+
-            'with status code' +response.statusCode.toString());
-
-    }
-  }
+ 
   
-  Future userSignup(BuildContext context,String email,String password,String confirmpassword) async{
+  Future<void> userSignup(BuildContext context,String email,String password,String confirmpassword) async{
     var body = jsonEncode({
       'email':email,
       'password':password,
       'confirm_password':confirmpassword
     });
     setSignUpLoading(true);
-    _Registeredstatus = Status.Registering;
+    
     notifyListeners();
     try{
-      Response response = await post(Uri.parse(AppUrl.baseUrl+'signup/'),headers: headers,
+      Response response = await post(Uri.parse(AppUrl.baseUrl+'/signup/'),headers: headers,
     body: body
     );
       var responsebody = response.body;
+      // responsebody['']
+      var mssg = jsonDecode(responsebody);
+      print(mssg['non_field_errors']);
+      print(responsebody.contains("non_field_errors"));
+      print(response.statusCode);
       if(response.statusCode ==400){
         setSignUpLoading(false);
         notifyListeners();
+       
         flushBarErrorMessage('account already present plesase verify you account to continue', context);
-        print('400');
+        
       }
       if(response.statusCode==200){
         setSignUpLoading(false);
-        _Registeredstatus=Status.Registered;
-        notifyListeners();
         
-        context.navigateNamedTo('/login');
+        notifyListeners();
         flushBarErrorMessage('Verify your email before login', context);
+        Timer(Duration(seconds: 2),()=>context.router.replaceNamed ('/login'));
+        
+        
       }
-      return responsebody;
+      
     } on SocketException{
-
-      throw FetchDataException('No internet Connection');
+      setSignUpLoading(false);
+      flushBarErrorMessage('NO Internet connection', context);
     }
 
     

@@ -11,11 +11,12 @@ import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:job_app/app_urls/app_urls.dart';
 import 'package:job_app/data/network/networkapiservice.dart';
-import 'package:job_app/model/advertisement.dart';
-import 'package:job_app/model/job_model/job.dart';
-import 'package:job_app/model/job_model/job_category.dart' as Jobca;
+import 'package:job_app/data/model/advertisement.dart';
+import 'package:job_app/data/model/job_model/idea.dart';
+import 'package:job_app/data/model/job_model/job.dart';
+import 'package:job_app/data/model/job_model/job_category.dart' as Jobca;
 
-import 'package:job_app/shared_preferences.dart/user_preferences.dart';
+import 'package:job_app/data/shared_preferences.dart/user_preferences.dart';
 import 'package:job_app/widgets/utlis.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -84,6 +85,37 @@ List<Jobs> jobResponseData =[];
     
     notifyListeners();
     }
+  Future<void> postJobs(String title,String location,String aboutCompany,String category,String jobtype,String description,String Company,String maxSalary,String minSalary,File image)async{
+    var token  = await UserPreferences().getToken();
+
+    var length = await image.length();
+    print(length);
+    var stream = new ByteStream(image.openRead());
+    stream.cast();
+
+    var uri = Uri.parse(AppUrl.baseUrl+'/job/jobs/') ;
+     var request  = new MultipartRequest('POST', uri);
+     request.headers['Authorizaton'] = 'Bearer $token';
+     var multipartfile  =new MultipartFile('banner', stream, length,filename: image.path);
+     print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+     print(title);
+
+
+     request.fields['title']= '$title';
+     request.fields['location']= '$location';
+     request.fields['job_category']= '$category';
+     request.fields['about_company'] ='$aboutCompany';
+     request.fields['min_salary'] ='$minSalary';
+     request.fields['max_salary'] = '$maxSalary';
+     request.fields['company'] = '$Company';
+     request.fields['job_type'] = '$jobtype';
+     request.fields['description']= '$description';
+
+     var response = await request.send();
+     print(response.statusCode);
+     
+
+  }
 
     ////////////////////////////Advertisement\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     ///
@@ -99,6 +131,25 @@ List<Jobs> jobResponseData =[];
       List<Ads> responseDat = item.map<Ads>((e) => Ads.fromJson(e)).toList();
     //  print(responseData);
     adsresponseData = responseDat;
+     isLoading = false;
+    notifyListeners();
+    
+  }
+
+
+
+  //////////////////////////////////////////////Ideas\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  ///
+   List<Idea> idearesponseData =[];
+ void getIdea()async{
+    isLoading = true;
+      var token = await UserPreferences().getToken();
+      dynamic data = await user_network.getGetApiResponse(AppUrl.baseUrl+'/job/idea/', token);
+      List<dynamic> item = json.decode(data.body);
+      print(data);
+      List<Idea> responseDat = item.map<Idea>((e) => Idea.fromJson(e)).toList();
+    //  print(responseData);
+    idearesponseData = responseDat;
      isLoading = false;
     notifyListeners();
     
