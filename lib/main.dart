@@ -6,14 +6,9 @@ import 'package:job_app/data/providers/user_creds/user_data.dart';
 import 'package:job_app/data/providers/user_provider.dart';
 import 'package:job_app/desgin_elements/design.dart';
 
-
 import 'package:job_app/data/routes/router.gr.dart';
 
-
 import 'package:provider/provider.dart';
-
-
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

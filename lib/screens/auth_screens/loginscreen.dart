@@ -38,20 +38,9 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         body: Stack(
         children: [
-          Container(          
-            decoration:BoxDecoration(
-              
-              image:DecorationImage(image:AssetImage("assets/images/splash.jpg"),
-            
-            fit:BoxFit.fill
-            ),
-           
-            )
-),
-Container(color:Colors.black.withOpacity(0.50)),
-
-
-       SingleChildScrollView(
+          Container(
+            color:Colors.black.withOpacity(0.50)),
+              SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
@@ -178,11 +167,7 @@ Container(color:Colors.black.withOpacity(0.50)),
                                   if(_formkey.currentState!.validate()){
                                       provider.userLogin(context,emailController.text.toString(), passwordController.text.toString());
                                   }
-                                  
-                                  
-                                 
-                                  
-                                 
+                                   
                                 },
 
                                 child: provider.loading?CircularProgressIndicator():Text(

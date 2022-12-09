@@ -43,7 +43,7 @@ class AuthProvider extends ChangeNotifier{
   Map<String,String> headers = {                           
        "Content-Type": "application/json; charset=UTF-8" };  
   
-  Future userLogin(BuildContext context,String email,String password) async{
+  Future<void> userLogin(BuildContext context,String email,String password) async{
     var body = jsonEncode({'email': email, 'password': password});
     setLoading(true);
     
@@ -89,7 +89,7 @@ class AuthProvider extends ChangeNotifier{
       
       
     }
-    return response;
+   
     }catch (e){
       flushBarErrorMessage(e.toString(), context);
     }
@@ -152,22 +152,24 @@ class AuthProvider extends ChangeNotifier{
   
   }
 
-  Future forgotPassword(BuildContext context,String email) async{
+  Future<void> forgotPassword(BuildContext context,String email) async{
     var body =jsonEncode({'email':email});
     try{
-
+      setLoading(true);
+      notifyListeners();
       Response response = await post(Uri.parse(AppUrl.resetPassword),body: body,headers: headers);
       print(response);
       var data = response.body;
       print(data);
       if(response.statusCode==201){
-        
+        setLoading(false);
+        notifyListeners();
         flushBarErrorMessage(data, context);
         Timer(Duration(seconds: 2),()=>context.navigateNamedTo('/forgot-password-verify'));
         
         
       }
-      return response;
+     
     }catch (e){
       flushBarErrorMessage(e.toString(), context);
     }
@@ -175,17 +177,21 @@ class AuthProvider extends ChangeNotifier{
     
 
   }
-  Future resetPasswordVerify(BuildContext context,String password, code)async{
+  Future<void> resetPasswordVerify(BuildContext context,String password, code)async{
     var body = jsonEncode({
       
       'new_password':password,
       'reset_code':code,
     });
+    setLoading(true);
+      notifyListeners();
     print(body);
     try{
       Response response = await post(Uri.parse(AppUrl.resetPasswordVerify),body: body,headers: headers);
       print(response.body);
       if(response.statusCode==200){
+        setLoading(false);
+      notifyListeners();
         print('password set successsfuly ');
         flushBarErrorMessage(response.body+'\n login to continue..', context);
         Timer(Duration(seconds: 2), (){
