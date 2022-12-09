@@ -1,8 +1,7 @@
 import 'dart:io';
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:job_app/desgin_elements/design.dart';
 import 'package:job_app/data/providers/user_creds/user_data.dart';
@@ -42,7 +41,7 @@ class _CreateExpereinceScreenState extends State<CreateExpereinceScreen> {
     return Scaffold(
       appBar:AppBar(
           leading: IconButton(icon: Icon(Icons.arrow_back_rounded),color: Colors.white,onPressed: (){
-            Navigator.pop(context);
+            context.router.pop() ;
           },),
           ),
       body: SingleChildScrollView(

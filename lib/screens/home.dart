@@ -44,11 +44,11 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    //  Provider.of<StaffProvider>(context);
+    
     
     final Size size  = MediaQuery.of(context).size;
     
-    Color colorPurple = Palette.lightPurple;
+    
      
     
     return Scaffold(
@@ -60,9 +60,9 @@ class _HomeState extends State<Home> {
         backgroundColor: Palette.searchColor,
         shadowColor: Color.fromARGB(0, 179, 59, 59),
         surfaceTintColor: Colors.transparent,
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 15),
+            padding:  EdgeInsets.only(right: 15),
             child: CircleAvatar(foregroundImage: AssetImage('assets/images/splash.jpg'),),
           )
           
@@ -75,9 +75,9 @@ class _HomeState extends State<Home> {
         child: Column(
           children: [
             advancedSearch(size: size, formKey: formKey, jobController: _jobController, cityController: _cityController, jobTypeController: _jobTypeController),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
               
-            ScrollWidget(size: size, colorPurple: colorPurple),
+            ScrollWidget(size: size,),
 
             List_job(),
           ]

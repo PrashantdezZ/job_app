@@ -6,11 +6,11 @@ class ScrollWidget extends StatefulWidget {
   const ScrollWidget({
     Key? key,
     required this.size,
-    required this.colorPurple,
+    
   }) : super(key: key);
 
   final Size size;
-  final Color colorPurple;
+ 
 
   @override
   State<ScrollWidget> createState() => _ScrollWidgetState();
@@ -22,6 +22,7 @@ class _ScrollWidgetState extends State<ScrollWidget> {
   Widget build(BuildContext context) {
     Size size  = MediaQuery.of(context).size;
     Provider.of<StaffProvider>(context,listen: false).getJobCategory();
+   
     return Column(
       
       mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +42,7 @@ class _ScrollWidgetState extends State<ScrollWidget> {
           SizedBox(height: 14,),
          
 
-                SizedBox(
+               SizedBox(
                   
                   height:  size.height*0.18,
                   child: Consumer<StaffProvider>(
@@ -53,6 +54,7 @@ class _ScrollWidgetState extends State<ScrollWidget> {
                         itemCount: provider.catresponseData.length,
                         itemBuilder: (context, index) {
                           var cat = provider.catresponseData[index];
+                          
                           return Container(
                             height: 120,
                             padding: EdgeInsets.only(top:7,bottom: 9),
@@ -83,10 +85,9 @@ class _ScrollWidgetState extends State<ScrollWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                            CircleAvatar(foregroundImage: NetworkImage(cat.imageUrl),),
-                            // Icon(Icons.book,color:widget.colorPurple,),
-                            Text(cat.name,style: TextStyle(color: Colors.black),),
-                            // Text(cat.id!.toString(),style: TextStyle(color:Colors.black))
+                          CircleAvatar(foregroundImage: NetworkImage(cat.imageUrl)),
+                          Text(cat.name,style: TextStyle(color: Colors.black),),
+                            
                         ],
                       ),
                     ),

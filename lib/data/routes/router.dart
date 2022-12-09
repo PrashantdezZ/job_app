@@ -40,16 +40,20 @@ import 'package:job_app/screens/user_screens/skills/skillScreen.dart';
     AutoRoute(path:'/staff-ads',page: AdvetisementScreen),
     AutoRoute(path:'/staff-idea',page:IdeaScreen ),
 
-    AutoRoute(path:'/home',page:Home),
+    AutoRoute(path:'/home',page:EmptyRouterPage,children: [
+      AutoRoute(path:'home',page: Home,initial: true),
+      AutoRoute(path: 'education',page: EducationScreen,),
+      AutoRoute(path: 'experience',page:ExperiencesScreen),
+      AutoRoute(path:'skill',page: SkillScreen),
+      AutoRoute(path: 'language',page: LanguageScreen),
+      AutoRoute(path: 'certificate',page: CertificateScreen),
+      AutoRoute(path: 'interest',page: InterestScreen),
+      AutoRoute(path: 'create-experience',page: CreateExpereinceScreen)
+
+    ]),
      
       
-      AutoRoute(path: '/education',page: EducationScreen,fullscreenDialog: true),
-      AutoRoute(path: '/experience',page:ExperiencesScreen),
-      AutoRoute(path:'/skill',page: SkillScreen),
-      AutoRoute(path: '/language',page: LanguageScreen),
-      AutoRoute(path: '/certificate',page: CertificateScreen),
-      AutoRoute(path: '/interest',page: InterestScreen),
-      AutoRoute(path: '/create-experience',page: CreateExpereinceScreen)
+      
 
     ])
   

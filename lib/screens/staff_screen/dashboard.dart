@@ -54,7 +54,7 @@ class _DashBoardState extends State<DashBoard> {
             advancedSearch(size: size, formKey: formKey, jobController: _jobController, cityController: _cityController, jobTypeController: _jobTypeController),
             SizedBox(height: 10,),
               
-            ScrollWidget(size: size, colorPurple: colorPurple),
+            ScrollWidget(size: size,),
 
             List_job(),
           ]

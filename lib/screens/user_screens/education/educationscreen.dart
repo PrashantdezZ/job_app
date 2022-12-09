@@ -1,13 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:job_app/desgin_elements/design.dart';
 import 'package:job_app/data/model/usermodels/education.dart';
 import 'package:job_app/data/providers/user_creds/user_data.dart';
-import 'package:job_app/data/providers/user_provider.dart';
-import 'package:job_app/data/routes/router.gr.dart';
-import 'package:job_app/widgets/elements/drawer.dart';
+
 import 'package:provider/provider.dart';
 
 
@@ -21,7 +18,7 @@ class EducationScreen extends StatelessWidget {
       
       appBar:AppBar(
         leading: IconButton(icon: Icon(Icons.arrow_back,),onPressed: (){
-          context.router.replaceNamed('/home');
+          context.router.pop();
         },),
         
       ),

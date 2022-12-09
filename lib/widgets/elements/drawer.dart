@@ -30,20 +30,10 @@ class UserDrawer extends StatelessWidget {
                   leading: Icon(Icons.home),
                   trailing: Icon(Icons.arrow_forward),
                   onTap: () {
-                    context.router.replaceNamed('/home');
+                    context.router.navigateNamed('home');
                   },
                 ),
-          ListTile(
-                  title: Text(
-                    "",
-                    // style: Style.BStyle,
-                  ),
-                  leading: Icon(Icons.note_alt_outlined),
-                  trailing: Icon(Icons.arrow_forward),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
+          
                 
           ExpansionTile(
             title: Text('Certification'),
@@ -57,7 +47,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Certificates') ,
                 onTap: (){
-                  context.router.replaceNamed('/certificate');
+                  context.router.navigateNamed('certificate');
                 },
 
               ),
@@ -95,7 +85,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Education') ,
                 onTap: (){
-                    context.router.navigateNamed('/education');
+                    context.router.navigateNamed('education');
                 },
 
               ),
@@ -122,9 +112,9 @@ class UserDrawer extends StatelessWidget {
               ListTile(
                 trailing: Icon(Icons.arrow_forward),
                 leading: Icon(Icons.view_agenda),
-                title:Text('View Expeiences') ,
+                title:Text('View Experience') ,
                 onTap: (){
-                  context.router.replaceNamed('/experience');
+                  context.router.navigateNamed('experience');
                 },
 
               ),
@@ -133,7 +123,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.create),
                 title: Text('Add Expeience'),
                 onTap: (){
-                  context.router.replaceNamed('/create-experience');
+                  context.router.navigateNamed('create-experience');
                 },
               ),
               
@@ -151,7 +141,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Interests') ,
                 onTap: (){
-                    context.router.replaceNamed('/interest');
+                    context.router.navigateNamed('interest');
                 },
 
               ),
@@ -161,18 +151,7 @@ class UserDrawer extends StatelessWidget {
                 title: Text('Add Interest'),
                 onTap: (){},
               ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.update),
-                title: Text('Update Interests') ,
-                onTap: (){},
-              ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.delete),
-                title: Text('Delete Interests'),
-                onTap: (){},
-              ),
+             
             ],
           ),
           ExpansionTile(
@@ -187,7 +166,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Languages') ,
                 onTap: (){
-                  context.router.replaceNamed('/language');
+                  context.router.replaceNamed('language');
                 },
 
               ),
@@ -215,7 +194,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Skills') ,
                 onTap: (){
-                  context.router.replaceNamed('/skill');
+                  context.router.navigateNamed('skill');
                 },
 
               ),

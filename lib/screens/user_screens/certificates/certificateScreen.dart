@@ -22,7 +22,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
      
        appBar: AppBar(
           leading: IconButton(icon: Icon(Icons.arrow_back_rounded),color: Colors.white,onPressed: (){
-            context.router.replaceNamed('/home');
+            context.router.pop();
           },),
       ),
       body:Container(

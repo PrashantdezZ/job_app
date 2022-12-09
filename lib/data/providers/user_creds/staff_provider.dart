@@ -26,18 +26,29 @@ class StaffProvider extends ChangeNotifier{
   List<JobCategory> catresponseData =[];
 
   
-  bool isLoading = false;
+  bool _isLoading = false;
+  bool get loading =>_isLoading;
+
+  setLoading(bool value){
+    _isLoading = value;
+    notifyListeners();
+  }
   //  Future<List<JobCategory>>
   void getJobCategory()async{
-    isLoading = true;
+    setLoading(true);
+    try{
       var token = await UserPreferences().getToken();
       dynamic data = await user_network.getGetApiResponse(AppUrl.baseUrl+'/job/job-categories/', token);
       List<dynamic> item = json.decode(data.body);
       List<JobCategory> responseDat = item.map<JobCategory>((e) => JobCategory.fromJson(e)).toList();
     //  print(responseData);
     catresponseData = responseDat;
-     isLoading = false;
+    setLoading(false);
     notifyListeners();
+    }catch(e){
+      print(e.toString());
+    }
+     
     
   }
   
@@ -123,7 +134,7 @@ List<Jobs> jobResponseData =[];
   //  Future<List<Ads>>
   List<Ads> adsresponseData =[];
  void getAds()async{
-    isLoading = true;
+    
       var token = await UserPreferences().getToken();
       dynamic data = await user_network.getGetApiResponse(AppUrl.baseUrl+'/job/advertisement/', token);
       List<dynamic> item = json.decode(data.body);
@@ -131,8 +142,7 @@ List<Jobs> jobResponseData =[];
       List<Ads> responseDat = item.map<Ads>((e) => Ads.fromJson(e)).toList();
     //  print(responseData);
     adsresponseData = responseDat;
-     isLoading = false;
-    notifyListeners();
+     
     
   }
 
@@ -142,7 +152,7 @@ List<Jobs> jobResponseData =[];
   ///
    List<Idea> idearesponseData =[];
  void getIdea()async{
-    isLoading = true;
+  
       var token = await UserPreferences().getToken();
       dynamic data = await user_network.getGetApiResponse(AppUrl.baseUrl+'/job/idea/', token);
       List<dynamic> item = json.decode(data.body);
@@ -150,8 +160,7 @@ List<Jobs> jobResponseData =[];
       List<Idea> responseDat = item.map<Idea>((e) => Idea.fromJson(e)).toList();
     //  print(responseData);
     idearesponseData = responseDat;
-     isLoading = false;
-    notifyListeners();
+    
     
   }
  }

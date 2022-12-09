@@ -11,15 +11,16 @@
 // ignore_for_file: type=lint
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i21;
-import 'package:flutter/cupertino.dart' as _i23;
-import 'package:flutter/material.dart' as _i22;
+import 'package:auto_route/auto_route.dart' as _i22;
+import 'package:auto_route/empty_router_widgets.dart' as _i13;
+import 'package:flutter/cupertino.dart' as _i24;
+import 'package:flutter/material.dart' as _i23;
 
 import '../../screens/auth_screens/forgotpassword.dart' as _i4;
 import '../../screens/auth_screens/forgotpasswordverify.dart' as _i5;
 import '../../screens/auth_screens/loginscreen.dart' as _i2;
 import '../../screens/auth_screens/signupscreen.dart' as _i3;
-import '../../screens/home.dart' as _i13;
+import '../../screens/home.dart' as _i14;
 import '../../screens/jobDetailscreen.dart' as _i6;
 import '../../screens/splashscreen.dart' as _i1;
 import '../../screens/staff_screen/adsScreen.dart' as _i11;
@@ -28,35 +29,35 @@ import '../../screens/staff_screen/ideas/ideaScreen.dart' as _i12;
 import '../../screens/staff_screen/jobcategoryScreen.dart' as _i8;
 import '../../screens/staff_screen/jobs/jobCreate.dart' as _i9;
 import '../../screens/staff_screen/jobs/jobscreen.dart' as _i10;
-import '../../screens/user_screens/certificates/certificateScreen.dart' as _i18;
-import '../../screens/user_screens/education/educationscreen.dart' as _i14;
-import '../../screens/user_screens/experience/ExperienceCreate.dart' as _i20;
-import '../../screens/user_screens/experience/experiencesscreen.dart' as _i15;
-import '../../screens/user_screens/interest/interestScreen.dart' as _i19;
-import '../../screens/user_screens/language/languageScreen.dart' as _i17;
-import '../../screens/user_screens/skills/skillScreen.dart' as _i16;
-import '../model/job_model/job.dart' as _i24;
+import '../../screens/user_screens/certificates/certificateScreen.dart' as _i19;
+import '../../screens/user_screens/education/educationscreen.dart' as _i15;
+import '../../screens/user_screens/experience/ExperienceCreate.dart' as _i21;
+import '../../screens/user_screens/experience/experiencesscreen.dart' as _i16;
+import '../../screens/user_screens/interest/interestScreen.dart' as _i20;
+import '../../screens/user_screens/language/languageScreen.dart' as _i18;
+import '../../screens/user_screens/skills/skillScreen.dart' as _i17;
+import '../model/job_model/job.dart' as _i25;
 
-class AppRouter extends _i21.RootStackRouter {
-  AppRouter([_i22.GlobalKey<_i22.NavigatorState>? navigatorKey])
+class AppRouter extends _i22.RootStackRouter {
+  AppRouter([_i23.GlobalKey<_i23.NavigatorState>? navigatorKey])
       : super(navigatorKey);
 
   @override
-  final Map<String, _i21.PageFactory> pagesMap = {
+  final Map<String, _i22.PageFactory> pagesMap = {
     SplashScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i1.SplashScreen(),
       );
     },
     LoginRoute.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i2.LoginPage(),
       );
     },
     Register.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i3.Register(),
       );
@@ -64,7 +65,7 @@ class AppRouter extends _i21.RootStackRouter {
     ForgotScreen.name: (routeData) {
       final args = routeData.argsAs<ForgotScreenArgs>(
           orElse: () => const ForgotScreenArgs());
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i4.ForgotScreen(key: args.key),
       );
@@ -72,7 +73,7 @@ class AppRouter extends _i21.RootStackRouter {
     ForgotScreenVerify.name: (routeData) {
       final args = routeData.argsAs<ForgotScreenVerifyArgs>(
           orElse: () => const ForgotScreenVerifyArgs());
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i5.ForgotScreenVerify(key: args.key),
       );
@@ -81,7 +82,7 @@ class AppRouter extends _i21.RootStackRouter {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<JobDetailRouteArgs>(
           orElse: () => JobDetailRouteArgs(id: pathParams.getInt('id')));
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i6.JobDetailPage(
           key: args.key,
@@ -93,187 +94,213 @@ class AppRouter extends _i21.RootStackRouter {
     DashBoard.name: (routeData) {
       final args =
           routeData.argsAs<DashBoardArgs>(orElse: () => const DashBoardArgs());
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i7.DashBoard(key: args.key),
       );
     },
     JobCategoryScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: _i8.JobCategoryScreen(),
       );
     },
     JobCreateScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i9.JobCreateScreen(),
       );
     },
     JobScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i10.JobScreen(),
       );
     },
     AdvetisementScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i11.AdvetisementScreen(),
       );
     },
     IdeaScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
         child: const _i12.IdeaScreen(),
       );
     },
+    EmptyRouterRoute.name: (routeData) {
+      return _i22.MaterialPageX<dynamic>(
+        routeData: routeData,
+        child: const _i13.EmptyRouterPage(),
+      );
+    },
     Home.name: (routeData) {
       final args = routeData.argsAs<HomeArgs>(orElse: () => const HomeArgs());
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i13.Home(key: args.key),
+        child: _i14.Home(key: args.key),
       );
     },
     EducationScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: _i14.EducationScreen(),
-        fullscreenDialog: true,
+        child: _i15.EducationScreen(),
       );
     },
     ExperiencesScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i15.ExperiencesScreen(),
+        child: const _i16.ExperiencesScreen(),
       );
     },
     SkillScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i16.SkillScreen(),
+        child: const _i17.SkillScreen(),
       );
     },
     LanguageScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i17.LanguageScreen(),
+        child: const _i18.LanguageScreen(),
       );
     },
     CertificateScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i18.CertificateScreen(),
+        child: const _i19.CertificateScreen(),
       );
     },
     InterestScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i19.InterestScreen(),
+        child: const _i20.InterestScreen(),
       );
     },
     CreateExpereinceScreen.name: (routeData) {
-      return _i21.MaterialPageX<dynamic>(
+      return _i22.MaterialPageX<dynamic>(
         routeData: routeData,
-        child: const _i20.CreateExpereinceScreen(),
+        child: const _i21.CreateExpereinceScreen(),
       );
     },
   };
 
   @override
-  List<_i21.RouteConfig> get routes => [
-        _i21.RouteConfig(
+  List<_i22.RouteConfig> get routes => [
+        _i22.RouteConfig(
           '/#redirect',
           path: '/',
           redirectTo: '/splash',
           fullMatch: true,
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           SplashScreen.name,
           path: '/splash',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           LoginRoute.name,
           path: '/login',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           Register.name,
           path: '/signup',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           ForgotScreen.name,
           path: '/forgot-password',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           ForgotScreenVerify.name,
           path: '/forgot-password-verify',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           JobDetailRoute.name,
           path: '/job-detail/:id',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           DashBoard.name,
           path: '/staffhome',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           JobCategoryScreen.name,
           path: '/jobCategory',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           JobCreateScreen.name,
           path: '/job-create',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           JobScreen.name,
           path: '/staff-jobs',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           AdvetisementScreen.name,
           path: '/staff-ads',
         ),
-        _i21.RouteConfig(
+        _i22.RouteConfig(
           IdeaScreen.name,
           path: '/staff-idea',
         ),
-        _i21.RouteConfig(
-          Home.name,
+        _i22.RouteConfig(
+          EmptyRouterRoute.name,
           path: '/home',
-        ),
-        _i21.RouteConfig(
-          EducationScreen.name,
-          path: '/education',
-        ),
-        _i21.RouteConfig(
-          ExperiencesScreen.name,
-          path: '/experience',
-        ),
-        _i21.RouteConfig(
-          SkillScreen.name,
-          path: '/skill',
-        ),
-        _i21.RouteConfig(
-          LanguageScreen.name,
-          path: '/language',
-        ),
-        _i21.RouteConfig(
-          CertificateScreen.name,
-          path: '/certificate',
-        ),
-        _i21.RouteConfig(
-          InterestScreen.name,
-          path: '/interest',
-        ),
-        _i21.RouteConfig(
-          CreateExpereinceScreen.name,
-          path: '/create-experience',
+          children: [
+            _i22.RouteConfig(
+              '#redirect',
+              path: '',
+              parent: EmptyRouterRoute.name,
+              redirectTo: 'home',
+              fullMatch: true,
+            ),
+            _i22.RouteConfig(
+              Home.name,
+              path: 'home',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i22.RouteConfig(
+              EducationScreen.name,
+              path: 'education',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i22.RouteConfig(
+              ExperiencesScreen.name,
+              path: 'experience',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i22.RouteConfig(
+              SkillScreen.name,
+              path: 'skill',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i22.RouteConfig(
+              LanguageScreen.name,
+              path: 'language',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i22.RouteConfig(
+              CertificateScreen.name,
+              path: 'certificate',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i22.RouteConfig(
+              InterestScreen.name,
+              path: 'interest',
+              parent: EmptyRouterRoute.name,
+            ),
+            _i22.RouteConfig(
+              CreateExpereinceScreen.name,
+              path: 'create-experience',
+              parent: EmptyRouterRoute.name,
+            ),
+          ],
         ),
       ];
 }
 
 /// generated route for
 /// [_i1.SplashScreen]
-class SplashScreen extends _i21.PageRouteInfo<void> {
+class SplashScreen extends _i22.PageRouteInfo<void> {
   const SplashScreen()
       : super(
           SplashScreen.name,
@@ -285,7 +312,7 @@ class SplashScreen extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.LoginPage]
-class LoginRoute extends _i21.PageRouteInfo<void> {
+class LoginRoute extends _i22.PageRouteInfo<void> {
   const LoginRoute()
       : super(
           LoginRoute.name,
@@ -297,7 +324,7 @@ class LoginRoute extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.Register]
-class Register extends _i21.PageRouteInfo<void> {
+class Register extends _i22.PageRouteInfo<void> {
   const Register()
       : super(
           Register.name,
@@ -309,8 +336,8 @@ class Register extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.ForgotScreen]
-class ForgotScreen extends _i21.PageRouteInfo<ForgotScreenArgs> {
-  ForgotScreen({_i23.Key? key})
+class ForgotScreen extends _i22.PageRouteInfo<ForgotScreenArgs> {
+  ForgotScreen({_i24.Key? key})
       : super(
           ForgotScreen.name,
           path: '/forgot-password',
@@ -323,7 +350,7 @@ class ForgotScreen extends _i21.PageRouteInfo<ForgotScreenArgs> {
 class ForgotScreenArgs {
   const ForgotScreenArgs({this.key});
 
-  final _i23.Key? key;
+  final _i24.Key? key;
 
   @override
   String toString() {
@@ -333,8 +360,8 @@ class ForgotScreenArgs {
 
 /// generated route for
 /// [_i5.ForgotScreenVerify]
-class ForgotScreenVerify extends _i21.PageRouteInfo<ForgotScreenVerifyArgs> {
-  ForgotScreenVerify({_i23.Key? key})
+class ForgotScreenVerify extends _i22.PageRouteInfo<ForgotScreenVerifyArgs> {
+  ForgotScreenVerify({_i24.Key? key})
       : super(
           ForgotScreenVerify.name,
           path: '/forgot-password-verify',
@@ -347,7 +374,7 @@ class ForgotScreenVerify extends _i21.PageRouteInfo<ForgotScreenVerifyArgs> {
 class ForgotScreenVerifyArgs {
   const ForgotScreenVerifyArgs({this.key});
 
-  final _i23.Key? key;
+  final _i24.Key? key;
 
   @override
   String toString() {
@@ -357,11 +384,11 @@ class ForgotScreenVerifyArgs {
 
 /// generated route for
 /// [_i6.JobDetailPage]
-class JobDetailRoute extends _i21.PageRouteInfo<JobDetailRouteArgs> {
+class JobDetailRoute extends _i22.PageRouteInfo<JobDetailRouteArgs> {
   JobDetailRoute({
-    _i23.Key? key,
+    _i24.Key? key,
     required int id,
-    _i24.Jobs? job,
+    _i25.Jobs? job,
   }) : super(
           JobDetailRoute.name,
           path: '/job-detail/:id',
@@ -383,11 +410,11 @@ class JobDetailRouteArgs {
     this.job,
   });
 
-  final _i23.Key? key;
+  final _i24.Key? key;
 
   final int id;
 
-  final _i24.Jobs? job;
+  final _i25.Jobs? job;
 
   @override
   String toString() {
@@ -397,8 +424,8 @@ class JobDetailRouteArgs {
 
 /// generated route for
 /// [_i7.DashBoard]
-class DashBoard extends _i21.PageRouteInfo<DashBoardArgs> {
-  DashBoard({_i23.Key? key})
+class DashBoard extends _i22.PageRouteInfo<DashBoardArgs> {
+  DashBoard({_i24.Key? key})
       : super(
           DashBoard.name,
           path: '/staffhome',
@@ -411,7 +438,7 @@ class DashBoard extends _i21.PageRouteInfo<DashBoardArgs> {
 class DashBoardArgs {
   const DashBoardArgs({this.key});
 
-  final _i23.Key? key;
+  final _i24.Key? key;
 
   @override
   String toString() {
@@ -421,7 +448,7 @@ class DashBoardArgs {
 
 /// generated route for
 /// [_i8.JobCategoryScreen]
-class JobCategoryScreen extends _i21.PageRouteInfo<void> {
+class JobCategoryScreen extends _i22.PageRouteInfo<void> {
   const JobCategoryScreen()
       : super(
           JobCategoryScreen.name,
@@ -433,7 +460,7 @@ class JobCategoryScreen extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i9.JobCreateScreen]
-class JobCreateScreen extends _i21.PageRouteInfo<void> {
+class JobCreateScreen extends _i22.PageRouteInfo<void> {
   const JobCreateScreen()
       : super(
           JobCreateScreen.name,
@@ -445,7 +472,7 @@ class JobCreateScreen extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.JobScreen]
-class JobScreen extends _i21.PageRouteInfo<void> {
+class JobScreen extends _i22.PageRouteInfo<void> {
   const JobScreen()
       : super(
           JobScreen.name,
@@ -457,7 +484,7 @@ class JobScreen extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.AdvetisementScreen]
-class AdvetisementScreen extends _i21.PageRouteInfo<void> {
+class AdvetisementScreen extends _i22.PageRouteInfo<void> {
   const AdvetisementScreen()
       : super(
           AdvetisementScreen.name,
@@ -469,7 +496,7 @@ class AdvetisementScreen extends _i21.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i12.IdeaScreen]
-class IdeaScreen extends _i21.PageRouteInfo<void> {
+class IdeaScreen extends _i22.PageRouteInfo<void> {
   const IdeaScreen()
       : super(
           IdeaScreen.name,
@@ -480,12 +507,25 @@ class IdeaScreen extends _i21.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i13.Home]
-class Home extends _i21.PageRouteInfo<HomeArgs> {
-  Home({_i23.Key? key})
+/// [_i13.EmptyRouterPage]
+class EmptyRouterRoute extends _i22.PageRouteInfo<void> {
+  const EmptyRouterRoute({List<_i22.PageRouteInfo>? children})
+      : super(
+          EmptyRouterRoute.name,
+          path: '/home',
+          initialChildren: children,
+        );
+
+  static const String name = 'EmptyRouterRoute';
+}
+
+/// generated route for
+/// [_i14.Home]
+class Home extends _i22.PageRouteInfo<HomeArgs> {
+  Home({_i24.Key? key})
       : super(
           Home.name,
-          path: '/home',
+          path: 'home',
           args: HomeArgs(key: key),
         );
 
@@ -495,7 +535,7 @@ class Home extends _i21.PageRouteInfo<HomeArgs> {
 class HomeArgs {
   const HomeArgs({this.key});
 
-  final _i23.Key? key;
+  final _i24.Key? key;
 
   @override
   String toString() {
@@ -504,84 +544,84 @@ class HomeArgs {
 }
 
 /// generated route for
-/// [_i14.EducationScreen]
-class EducationScreen extends _i21.PageRouteInfo<void> {
+/// [_i15.EducationScreen]
+class EducationScreen extends _i22.PageRouteInfo<void> {
   const EducationScreen()
       : super(
           EducationScreen.name,
-          path: '/education',
+          path: 'education',
         );
 
   static const String name = 'EducationScreen';
 }
 
 /// generated route for
-/// [_i15.ExperiencesScreen]
-class ExperiencesScreen extends _i21.PageRouteInfo<void> {
+/// [_i16.ExperiencesScreen]
+class ExperiencesScreen extends _i22.PageRouteInfo<void> {
   const ExperiencesScreen()
       : super(
           ExperiencesScreen.name,
-          path: '/experience',
+          path: 'experience',
         );
 
   static const String name = 'ExperiencesScreen';
 }
 
 /// generated route for
-/// [_i16.SkillScreen]
-class SkillScreen extends _i21.PageRouteInfo<void> {
+/// [_i17.SkillScreen]
+class SkillScreen extends _i22.PageRouteInfo<void> {
   const SkillScreen()
       : super(
           SkillScreen.name,
-          path: '/skill',
+          path: 'skill',
         );
 
   static const String name = 'SkillScreen';
 }
 
 /// generated route for
-/// [_i17.LanguageScreen]
-class LanguageScreen extends _i21.PageRouteInfo<void> {
+/// [_i18.LanguageScreen]
+class LanguageScreen extends _i22.PageRouteInfo<void> {
   const LanguageScreen()
       : super(
           LanguageScreen.name,
-          path: '/language',
+          path: 'language',
         );
 
   static const String name = 'LanguageScreen';
 }
 
 /// generated route for
-/// [_i18.CertificateScreen]
-class CertificateScreen extends _i21.PageRouteInfo<void> {
+/// [_i19.CertificateScreen]
+class CertificateScreen extends _i22.PageRouteInfo<void> {
   const CertificateScreen()
       : super(
           CertificateScreen.name,
-          path: '/certificate',
+          path: 'certificate',
         );
 
   static const String name = 'CertificateScreen';
 }
 
 /// generated route for
-/// [_i19.InterestScreen]
-class InterestScreen extends _i21.PageRouteInfo<void> {
+/// [_i20.InterestScreen]
+class InterestScreen extends _i22.PageRouteInfo<void> {
   const InterestScreen()
       : super(
           InterestScreen.name,
-          path: '/interest',
+          path: 'interest',
         );
 
   static const String name = 'InterestScreen';
 }
 
 /// generated route for
-/// [_i20.CreateExpereinceScreen]
-class CreateExpereinceScreen extends _i21.PageRouteInfo<void> {
+/// [_i21.CreateExpereinceScreen]
+class CreateExpereinceScreen extends _i22.PageRouteInfo<void> {
   const CreateExpereinceScreen()
       : super(
           CreateExpereinceScreen.name,
-          path: '/create-experience',
+          path: 'create-experience',
         );
 
   static const String name = 'CreateExpereinceScreen';
