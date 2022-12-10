@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:job_app/desgin_elements/design.dart';
 import 'package:job_app/data/model/usermodels/skill.dart';
 import 'package:job_app/data/providers/user_creds/user_data.dart';
+import 'package:job_app/screens/user_screens/users_add_dialog.dart';
 import 'package:job_app/widgets/elements/drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -37,11 +38,15 @@ class _SkillScreenState extends State<SkillScreen> {
                   trailing: SizedBox(
                     width: 111,
                     child: Row(children: [
-                                                    IconButton(onPressed: (){}, 
+                                                    IconButton(onPressed: (){
+                                                      updateSkillDialog(context,sk);
+                                                    }, 
                                                     icon: Icon(Icons.edit,color: Palette.lightPurple,),
                                                     ),
                                                     
-                                                    IconButton(onPressed: (){}, 
+                                                    IconButton(onPressed: (){
+                                                      deleteSkillDialog(context,sk);
+                                                    }, 
                                                     icon: Icon(Icons.delete,color: Colors.red,),
                                                     )
                                                   ],),

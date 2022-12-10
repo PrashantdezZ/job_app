@@ -46,10 +46,11 @@ class _ExperiencesScreenState extends State<ExperiencesScreen> {
                     itemBuilder: (context, index) {
                       var exp = provider.expResponseData[index];
                       double lengthh = 16;
+                      
                       if(exp.company.characters.length>10){
                         lengthh = 14.4;
                       }
-                      return  GestureDetector(
+                      return GestureDetector(
                       onTap:(){print('');},
                       child: Stack(
                         children:[ Container(
@@ -137,18 +138,7 @@ class _ExperiencesScreenState extends State<ExperiencesScreen> {
                                               ),
                                             ),
                                             SizedBox(height: 10,),
-                                            
-                                            // Text('Description:'+exp.description,
-                                           
-                                            
-                                            //   style: TextStyle(
-                                            //     fontWeight: FontWeight.w400,
-                                            //     fontSize: 11,
-                                            //     color: Colors.black.withOpacity(0.8),
-                                            //   ),
-                                            // ),
-                                            
-                      
+                                         
                                         ],
                                       ),
                                     ),
@@ -165,18 +155,18 @@ class _ExperiencesScreenState extends State<ExperiencesScreen> {
                           bottom: 30,
                           right: 10,
                           child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.end,
-                                                crossAxisAlignment: CrossAxisAlignment.end,
-                                                children: [
-                                                  IconButton(onPressed: (){}, 
-                                                  icon: Icon(Icons.edit,color: Palette.lightPurple,),
-                                                  ),
-                                                  SizedBox(width: 3.4,),
-                                                  IconButton(onPressed: (){}, 
-                                                  icon: Icon(Icons.delete,color: Colors.red,),
-                                                  )
-                                                ],
-                                              ))
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        IconButton(onPressed: (){}, 
+                                        icon: Icon(Icons.edit,color: Palette.lightPurple,),
+                                        ),
+                                        SizedBox(width: 3.4,),
+                                        IconButton(onPressed: (){}, 
+                                        icon: Icon(Icons.delete,color: Colors.red,),
+                                        )
+                                      ],
+                                    ))
                         ]
                       ),
                     );

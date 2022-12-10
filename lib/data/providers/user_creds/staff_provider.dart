@@ -26,16 +26,16 @@ class StaffProvider extends ChangeNotifier{
   List<JobCategory> catresponseData =[];
 
   
-  bool _isLoading = false;
-  bool get loading =>_isLoading;
+  // bool _isLoading = false;
+  // bool get loading =>_isLoading;
 
-  setLoading(bool value){
-    _isLoading = value;
-    notifyListeners();
-  }
+  // setLoading(bool value){
+  //   _isLoading = value;
+  //   notifyListeners();
+  // }
   //  Future<List<JobCategory>>
   void getJobCategory()async{
-    setLoading(true);
+    // setLoading(true);
     try{
       var token = await UserPreferences().getToken();
       dynamic data = await user_network.getGetApiResponse(AppUrl.baseUrl+'/job/job-categories/', token);
@@ -43,7 +43,7 @@ class StaffProvider extends ChangeNotifier{
       List<JobCategory> responseDat = item.map<JobCategory>((e) => JobCategory.fromJson(e)).toList();
     //  print(responseData);
     catresponseData = responseDat;
-    setLoading(false);
+    // setLoading(false);
     notifyListeners();
     }catch(e){
       print(e.toString());

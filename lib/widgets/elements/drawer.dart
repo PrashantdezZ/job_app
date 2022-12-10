@@ -59,18 +59,7 @@ class UserDrawer extends StatelessWidget {
                   
                 },
               ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.update),
-                title: Text('Update Certificateob') ,
-                onTap: (){},
-              ),
-              ListTile(
-                trailing: Icon(Icons.arrow_forward),
-                leading: Icon(Icons.delete),
-                title: Text('Delete Certificate'),
-                onTap: (){},
-              ),
+              
             ],
           ),
           ExpansionTile(
@@ -166,7 +155,7 @@ class UserDrawer extends StatelessWidget {
                 leading: Icon(Icons.view_agenda),
                 title:Text('View Languages') ,
                 onTap: (){
-                  context.router.replaceNamed('language');
+                  context.router.navigateNamed('language');
                 },
 
               ),

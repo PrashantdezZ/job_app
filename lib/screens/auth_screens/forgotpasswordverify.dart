@@ -183,7 +183,7 @@ class _ForgotScreenVerifyState extends State<ForgotScreenVerify> {
                                 onPressed: () {
                                   if(_formkey.currentState!.validate())
                                   {
-                                                                     provider.resetPasswordVerify(context, _passwordController.text.toString(), _codeController.text);
+                                   provider.resetPasswordVerify(context, _passwordController.text.toString(), _codeController.text);
 
                                   }
                                 },

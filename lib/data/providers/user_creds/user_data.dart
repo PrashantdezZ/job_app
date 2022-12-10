@@ -3,7 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'package:job_app/app_urls/app_urls.dart';
@@ -177,6 +177,68 @@ class UserData extends ChangeNotifier{
 
     
     }
+   
+   Future<void> updateEducation(int id,BuildContext context,String title,String description,String passed_year)async{
+      final  user  = await UserPreferences().getUser();
+      print(user.token);
+      print(user.id);
+      final token = user.token;
+      final user_id = user.id;
+      var body =jsonEncode({
+        'title' : title,
+        'description' :description,
+        'passed_year': passed_year,
+        'user':user_id
+      });
+      dynamic response;
+
+
+      try{
+          Response response = await put(Uri.parse(AppUrl.baseUrl+'/job/education/'+'$id/'),body: body,headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  'Accept': 'application/json',
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+          print(data);
+          if(response.statusCode == 200){
+            getEducation();
+            flushBarErrorMessage('Education Added', context);
+            print('created ');
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+    
+    }
+
+    Future<void> deleteEducation(int id,BuildContext context)async{
+      final  user  = await UserPreferences().getUser();
+      
+      final token = user.token;
+     
+     
+      dynamic response;
+
+
+      try{
+          Response response = await delete(Uri.parse(AppUrl.baseUrl+'/job/education/'+'$id/'),headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  'Accept': 'application/json',
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+          print(data);
+          if(response.statusCode == 200){
+            getEducation();
+            flushBarErrorMessage('Education Deleted', context);
+            print('created ');
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+    
+    }
 
 
     /////////////////////////////////////Interest\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -199,14 +261,13 @@ class UserData extends ChangeNotifier{
     }
     
     // }
-    Future<Response> postInterest(String title)async{
+    Future<void> postInterest(BuildContext context,String title)async{
       final  user  = await UserPreferences().getUser();
-      print(user.token);
-      print(user.id);
+      
       final token = user.token;
       final user_id = user.id;
       var body =jsonEncode({
-        'title' : 'title',
+        'title' : title,
         
         'user':user_id
       });
@@ -221,18 +282,81 @@ class UserData extends ChangeNotifier{
           final data = response.body;
           print(data);
           if(response.statusCode == 200){
+            context.router.navigateNamed('interest');
             print('created ');
           }
       }catch(e){
         print(e.toString());
       }
 
-      return response;
+      
     }
+   
+    Future<void> updateInterest(BuildContext context,String title,int id)async{
+      final  user  = await UserPreferences().getUser();
+      
+      final token = user.token;
+      final user_id = user.id;
+      var body =jsonEncode({
+        'title' : title,
+        
+        'user':user_id
+      });
+      dynamic response;
+
+
+      try{
+          Response response = await put(Uri.parse(AppUrl.baseUrl+'/job/interest/' +'$id/'),body: body,headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  'Accept': 'application/json',
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+          print(data);
+          if(response.statusCode == 200){
+            getInterest();
+            context.router.navigateNamed('interest');
+            print('created ');
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+      
+    }
+     Future<void> deleteInterest(int id,BuildContext context)async{
+      final  user  = await UserPreferences().getUser();
+      
+      final token = user.token;
+      
+      dynamic response;
+
+
+      try{
+          Response response = await delete(Uri.parse(AppUrl.baseUrl+'/job/interest/'+'$id/'),headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+          print(data);
+          print(response.statusCode);
+          if(response.statusCode == 200){
+            getInterest();
+            flushBarErrorMessage('Interest removed', context);
+            // Navigator.of(context).pop();
+           context.router.replaceNamed('interest');
+           
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+     
+    }
+
    //////////////////////////////////////Language\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+   
+  
    List<Language> lanResponseData =[];
-  
-  
   void getLanguage()async{
     
     
@@ -256,7 +380,7 @@ class UserData extends ChangeNotifier{
       final token = user.token;
       final user_id = user.id;
       var body =jsonEncode({
-        'title' : 'title',
+        'title' : title,
          
         'user':user_id
       });
@@ -280,12 +404,76 @@ class UserData extends ChangeNotifier{
 
       return response;
     }
-    
+     Future<void> updateLanguage(int id,String title,BuildContext context)async{
+      final  user  = await UserPreferences().getUser();
+      print(user.token);
+      print(user.id);
+      final token = user.token;
+      final user_id = user.id;
+      var body =jsonEncode({
+        'title' : title,
+         
+        'user':user_id
+      });
+      dynamic response;
 
-    List<Skill> skillResponseData =[];
+
+      try{
+          Response response = await put(Uri.parse(AppUrl.baseUrl+'/job/language/'+'$id/'),body: body,headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  'Accept': 'application/json',
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+
+          print(data);
+          if(response.statusCode == 200){
+            getLanguage();
+            
+            flushBarErrorMessage('Language updated Successfully', context);
+            context.router.replaceNamed('language');
+            print('created ');
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+      return response;
+    }
+     Future<void> deleteLanguage(int id,BuildContext context)async{
+      final  user  = await UserPreferences().getUser();
+      
+      final token = user.token;
+      
+      dynamic response;
+
+
+      try{
+          Response response = await delete(Uri.parse(AppUrl.baseUrl+'/job/language/'+'$id/'),headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+          print(data);
+          print(response.statusCode);
+          if(response.statusCode == 200){
+            getLanguage();
+            flushBarErrorMessage('Language removed', context);
+            // Navigator.of(context).pop();
+           context.router.replaceNamed('language');
+           
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+     
+    }
+
+
+    
   /////////////////////////////////////////////////Skill\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   
-  
+  List<Skill> skillResponseData =[];
   void getSkill()async{
     
     
@@ -301,7 +489,7 @@ class UserData extends ChangeNotifier{
     notifyListeners();
     }
     
-    Future<void> postSkill(String title,BuildContext context)async{
+  Future<void> postSkill(String title,BuildContext context)async{
       final  user  = await UserPreferences().getUser();
       
       final token = user.token;
@@ -336,5 +524,74 @@ class UserData extends ChangeNotifier{
 
      
     }
+
+  Future<void> updateSkill(int id,String title,BuildContext context)async{
+      final  user  = await UserPreferences().getUser();
+      
+      final token = user.token;
+      final user_id = user.id;
+      
+      
+      var body =jsonEncode({
+        'skill' : title,
+        
+        'user':user_id,
+      });
+      dynamic response;
+
+
+      try{
+          Response response = await put(Uri.parse(AppUrl.baseUrl+'/job/skill/'+'$id/'),body: body,headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+          print(data);
+          print(response.statusCode);
+          if(response.statusCode == 200){
+            getSkill();
+            flushBarErrorMessage('skill updated', context);
+            
+           
+            
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+     
+    }
+  
+  Future<void> deleteSkill(int id,BuildContext context)async{
+      final  user  = await UserPreferences().getUser();
+      
+      final token = user.token;
+      
+      dynamic response;
+
+
+      try{
+          Response response = await delete(Uri.parse(AppUrl.baseUrl+'/job/skill/'+'$id/'),headers:{                           
+                                                  "Content-Type": "application/json; charset=UTF-8" ,
+                                                  
+                                                      'Authorization': 'Bearer $token'} );
+          final data = response.body;
+          print(data);
+          print(response.statusCode);
+          if(response.statusCode == 200){
+            getSkill();
+            flushBarErrorMessage('skill removed', context);
+            // Navigator.of(context).pop();
+           context.router.replaceNamed('skill');
+           
+          }
+      }catch(e){
+        print(e.toString());
+      }
+
+     
+    }
+
+
 
 }

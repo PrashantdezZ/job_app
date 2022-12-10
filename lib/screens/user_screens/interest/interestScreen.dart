@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:job_app/desgin_elements/design.dart';
 import 'package:job_app/data/model/usermodels/interest.dart';
 import 'package:job_app/data/providers/user_creds/user_data.dart';
+import 'package:job_app/screens/user_screens/users_add_dialog.dart';
 import 'package:provider/provider.dart';
 
 class InterestScreen extends StatefulWidget {
@@ -36,11 +37,15 @@ class _InterestScreenState extends State<InterestScreen> {
                   trailing: SizedBox(
                     width: 111,
                     child: Row(children: [
-                                                    IconButton(onPressed: (){}, 
+                                                    IconButton(onPressed: (){
+                                                      updateInterestDialog(context, sk);
+                                                    }, 
                                                     icon: Icon(Icons.edit,color: Palette.lightPurple,),
                                                     ),
                                                     
-                                                    IconButton(onPressed: (){}, 
+                                                    IconButton(onPressed: (){
+                                                      deleteIntersetDialog(context, sk);
+                                                    }, 
                                                     icon: Icon(Icons.delete,color: Colors.red,),
                                                     )
                                                   ],),
